@@ -1,4 +1,4 @@
-#include "justina_tools/justina_hri.h"
+#include "justina_tools/justinahri.h"
 
 SpeechGeneratorTasks JustinaHRI::m_spgen;
 SpeechRecognitionStatus JustinaHRI::m_sprec;

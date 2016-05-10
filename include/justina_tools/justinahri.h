@@ -16,8 +16,8 @@
  * @author Marco Negrete
  * @version 0.1
 */
-#ifndef _JUSTINA_HRI_H_
-#define _JUSTINA_HRI_H_
+#ifndef _JUSTINAHRI_H_
+#define _JUSTINAHRI_H_
 #include <string>
 #include "ros/ros.h"
 #include "justina_tools/speechrecognitionstatus.h"
