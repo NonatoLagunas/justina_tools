@@ -112,8 +112,8 @@ include_directories(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   INCLUDE_DIRS include
-#  LIBRARIES justina_tools
-#  CATKIN_DEPENDS roscpp rospy std_msgs
+  LIBRARIES justina_tools
+  CATKIN_DEPENDS roscpp rospy std_msgs message_generation
 #  DEPENDS system_lib
 )
 
