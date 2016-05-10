@@ -17,8 +17,14 @@
 class HeadStatus
 {
     private:
+        ros::Subscriber m_subHeadCurrentPose; /**< ROS subscriber to the head
+                                                pose topic */
+
         ros::Publisher m_headPosePublisher; /**< ROS publisher for the head
                                               pose topic*/
+
+        bool m_isInitialized; /**< Indicates if the object is conncected with
+                               ROS */
 
         std::string m_headPoseTopic; /**< Stores the name of the topic from 
                                        where the head status will be obtained*/
@@ -47,9 +53,17 @@ class HeadStatus
          * @param headPoseTopic The name of the topic which will be updated
          * when the robot's head pose information.
          */
-        HeadStatus(ros::NodeHandle &nh, std::string headPoseTopic = 
+        HeadStatus(ros::NodeHandle *nh = 0, std::string headPoseTopic = 
                 "/hardware/head/current_pose");
         
+        /**
+         * @brief Initialize the communication of the object with ROS.
+         *
+         * @param nh The ROS node handler of the calling node. If no node 
+         * handler provided, the the node will create one later.
+         */
+        void initRosConnection(ros::NodeHandle *nh);
+
         /**
          * @brief Returns the value of the current head pan.
          * 
