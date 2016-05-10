@@ -16,6 +16,23 @@ SpeechRecognitionStatus::SpeechRecognitionStatus(ros::NodeHandle &nh,
             100, &SpeechRecognitionStatus::recoSentenceCallback, this);
 }
 
+SpeechRecognitionStatus::SpeechRecognitionStatus(
+        std::string recoSentencesTopic
+        ) : m_recoSentencesTopic(recoSentencesTopic)
+{
+    /**
+     * The listen mode is turned off by default
+     */
+    m_listenActivated = false;
+
+    /**
+     * Subscribe to the recognized speech ros topic
+     */
+    ros::NodeHandle nh;
+    ros::Subscriber subHeadCurrentPose = nh.subscribe(m_recoSentencesTopic,
+            100, &SpeechRecognitionStatus::recoSentenceCallback, this);
+}
+
 void SpeechRecognitionStatus::recoSentenceCallback(const 
         hri_msgs::RecognizedSpeech::ConstPtr &recoSentencesMsg)
 {

@@ -87,6 +87,16 @@ class SpeechRecognitionStatus
          */
         SpeechRecognitionStatus(ros::NodeHandle &nh, std::string 
                 recoSentencesTopic= "recognizedSpeech");
+
+        /**
+         * @brief Default constructor.
+         *
+         * Creates a new SpeechRecognitionStatus object with listen mode
+         * deactivated by default. It creates a local node handler to 
+         * subscribe to the recognized speech topic.
+         */
+        SpeechRecognitionStatus(std::string 
+                recoSentencesTopic= "recognizedSpeech");
         
         /**
          * @brief Activates the listening mode i.e. start the storing of the
