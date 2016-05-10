@@ -1,6 +1,6 @@
 #include "justina_tools/speechrecognitionstatus.h"
 
-SpeechRecognitionStatus::SpeechRecognitionStatus(ros::NodeHandle &nh,
+SpeechRecognitionStatus::SpeechRecognitionStatus(ros::NodeHandle *nh,
         std::string recoSentencesTopic) : 
     m_recoSentencesTopic(recoSentencesTopic)
 {
@@ -10,27 +10,66 @@ SpeechRecognitionStatus::SpeechRecognitionStatus(ros::NodeHandle &nh,
     m_listenActivated = false;
 
     /**
-     * Subscribe to the recognized speech ros topic
+     * Subscribe to the recognized speech ros topic if the communication with 
+     * ROS is initialized.
      */
-    ros::Subscriber subHeadCurrentPose = nh.subscribe(m_recoSentencesTopic,
-            100, &SpeechRecognitionStatus::recoSentenceCallback, this);
+    m_isInitialized = false; 
+    if(ros::isInitialized())
+    {
+        /**
+         * If no node handler provided, then create a new one.
+         */
+        if(nh == 0)
+        {
+            nh = new ros::NodeHandle;
+        }
+        /*
+         * Initialize subscribers and verify.
+         */
+        subHeadCurrentPose = nh->subscribe(m_recoSentencesTopic,
+                100, &SpeechRecognitionStatus::recoSentenceCallback, this);
+        if(subHeadCurrentPose)
+        {
+            m_isInitialized = true; 
+        }
+    }
 }
 
-SpeechRecognitionStatus::SpeechRecognitionStatus(
-        std::string recoSentencesTopic
-        ) : m_recoSentencesTopic(recoSentencesTopic)
+void SpeechRecognitionStatus::initRosConnection(ros::NodeHandle *nh)
 {
     /**
-     * The listen mode is turned off by default
+     * Subscribe to the recognized speech ros topic if the communication with 
+     * ROS is initialized.
      */
-    m_listenActivated = false;
+    if(!m_isInitialized && ros::isInitialized())
+    {
+        /**
+         * If no node handler provided, then create a new one.
+         */
+        if(nh == 0)
+        {
+            nh = new ros::NodeHandle;
+        }
+        /*
+         * Initialize subscribers and verify.
+         */
+        subHeadCurrentPose = nh->subscribe(m_recoSentencesTopic,
+                100, &SpeechRecognitionStatus::recoSentenceCallback, this);
+        if(subHeadCurrentPose)
+        {
+            m_isInitialized = true; 
+        }
 
-    /**
-     * Subscribe to the recognized speech ros topic
-     */
-    ros::NodeHandle nh;
-    ros::Subscriber subHeadCurrentPose = nh.subscribe(m_recoSentencesTopic,
-            100, &SpeechRecognitionStatus::recoSentenceCallback, this);
+        return;
+    }
+    /*
+    if(m_isInitialized)
+    {
+    }
+    if(ros::isInitialized())
+    {
+    }
+    */
 }
 
 void SpeechRecognitionStatus::recoSentenceCallback(const 

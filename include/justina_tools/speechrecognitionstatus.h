@@ -41,6 +41,11 @@ class SpeechRecognitionStatus
                 hypothesis(newHypothesis), confidence(newConfidence) {}
         };
 
+        ros::Subscriber subHeadCurrentPose; /**< the head pose subscriber */
+
+        bool m_isInitialized; /**< Indicates if the object is conncected with
+                               ROS */
+
         std::queue<RecognizedSentence> 
             m_lastRecoSentencesQueue; /**< Stores the last recognized
                                         hypothesis */
@@ -79,24 +84,26 @@ class SpeechRecognitionStatus
          * @brief Class constructor
          * 
          * Creates a new SpeechRecognitionStatus object with listen mode 
-         * deactivated by default.
+         * deactivated by default. If ROS is not initialized the 
+         * initROSConnection methon must be called later (after the
+         * initialization of ROS).
          *
-         * @param nh The ROS Node Handler of the simple task planner node.
-         * @param sprecRecoSentencesTopic The name of the topic which will be 
-         * updated with the current recognized speech value.
+         * @param nh The ROS Node Handler of the calling node. If 
+         * no node handler is provided then a new one will be created.
+         * @param sprecRecoSentencesTopic The name of the topic 
+         * (default: recognizedSpeech) which will be updated with the current 
+         * recognized speech value.
          */
-        SpeechRecognitionStatus(ros::NodeHandle &nh, std::string 
+        SpeechRecognitionStatus(ros::NodeHandle *nh = 0, std::string 
                 recoSentencesTopic= "recognizedSpeech");
 
         /**
-         * @brief Default constructor.
+         * @brief Initialize the communication of the object with ROS.
          *
-         * Creates a new SpeechRecognitionStatus object with listen mode
-         * deactivated by default. It creates a local node handler to 
-         * subscribe to the recognized speech topic.
+         * @param nh The ROS node handler of the calling node. If no node 
+         * handler provided, the the node will create one later.
          */
-        SpeechRecognitionStatus(std::string 
-                recoSentencesTopic= "recognizedSpeech");
+        void initRosConnection(ros::NodeHandle *nh);
         
         /**
          * @brief Activates the listening mode i.e. start the storing of the
