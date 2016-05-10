@@ -131,6 +131,11 @@ bool LangUnderstandingTasks::isNegativeUserConfirmation(std::string sentence)
 bool LangUnderstandingTasks::parseSentence(std::string sentenceToParse, 
         CommandFrame &parseResult)
 {
+    if(!ros::isInitialized())
+    {
+        return false;
+    }
+
     /**
      * Create a client object to call the ROS service
      */
