@@ -26,9 +26,9 @@ SpeechRecognitionStatus::SpeechRecognitionStatus(ros::NodeHandle *nh,
         /*
          * Initialize subscribers and verify.
          */
-        subHeadCurrentPose = nh->subscribe(m_recoSentencesTopic,
+        m_subRecoSpeech = nh->subscribe(m_recoSentencesTopic,
                 100, &SpeechRecognitionStatus::recoSentenceCallback, this);
-        if(subHeadCurrentPose)
+        if(m_subRecoSpeech)
         {
             m_isInitialized = true; 
         }
@@ -53,9 +53,9 @@ void SpeechRecognitionStatus::initRosConnection(ros::NodeHandle *nh)
         /*
          * Initialize subscribers and verify.
          */
-        subHeadCurrentPose = nh->subscribe(m_recoSentencesTopic,
+        m_subRecoSpeech = nh->subscribe(m_recoSentencesTopic,
                 100, &SpeechRecognitionStatus::recoSentenceCallback, this);
-        if(subHeadCurrentPose)
+        if(m_subRecoSpeech)
         {
             m_isInitialized = true; 
         }

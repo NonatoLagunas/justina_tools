@@ -41,7 +41,7 @@ class SpeechRecognitionStatus
                 hypothesis(newHypothesis), confidence(newConfidence) {}
         };
 
-        ros::Subscriber subHeadCurrentPose; /**< the head pose subscriber */
+        ros::Subscriber m_subRecoSpeech; /**< the head pose subscriber */
 
         bool m_isInitialized; /**< Indicates if the object is conncected with
                                ROS */
