@@ -8,6 +8,13 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  message_generation
+
+  #Package dependencies
+  bbros_bridge
+  hri_msgs
+  planning_msgs
+  language_understanding
 )
 
 ## System dependencies are found with CMake's conventions
@@ -100,7 +107,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
+  INCLUDE_DIRS include
 #  LIBRARIES justina_tools
 #  CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
@@ -114,6 +121,7 @@ catkin_package(
 ## Your package locations should be listed before other locations
 # include_directories(include)
 include_directories(
+  include
   ${catkin_INCLUDE_DIRS}
 )
 
@@ -122,6 +130,9 @@ include_directories(
 #   src/${PROJECT_NAME}/justina_tools.cpp
 # )
 
+file(GLOB_RECURSE headers "include/justina_tools/*.h*")
+file(GLOB_RECURSE sources "include/justina_tools/*.c*" "src/*.c*")
+
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
@@ -129,6 +140,7 @@ include_directories(
 
 ## Declare a C++ executable
 # add_executable(justina_tools_node src/justina_tools_node.cpp)
+add_executable(justina_tools_node ${sources} ${headers})
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
@@ -138,6 +150,11 @@ include_directories(
 # target_link_libraries(justina_tools_node
 #   ${catkin_LIBRARIES}
 # )
+### Specify libraries to link a library or executable target against
+ target_link_libraries(
+   justina_tools_node
+   ${catkin_LIBRARIES}
+ )
 
 #############
 ## Install ##
