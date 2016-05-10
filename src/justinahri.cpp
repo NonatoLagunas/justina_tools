@@ -14,6 +14,7 @@ bool JustinaHRI::setNodeHandle(ros::NodeHandle* nodeHandler)
     if(nodeHandler == 0)
         return false;
 
+    m_sprec.initRosConnection(nodeHandler);
     m_isNodeSet = true;
     return true;
 }
