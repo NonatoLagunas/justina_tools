@@ -4,7 +4,7 @@ HeadStatus::HeadStatus(ros::NodeHandle *nh, std::string headPoseTopic):
     m_headPoseTopic(headPoseTopic)
 {
     /**
-     * Subscribe to the recognized speech ros topic if the communication with 
+     * Subscribe to the head pose ros topic if the communication with 
      * ROS is initialized.
      */
     m_isInitialized = false; 
