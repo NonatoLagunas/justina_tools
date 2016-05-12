@@ -12,8 +12,8 @@
  *  - Recognize a voice sentence.
  *  - Speech a voice sentence.
  *
+ * @author Marco Negrete (the_magnificent)
  * @author R. Nonato Lagunas (nonato)
- * @author Marco Negrete
  * @version 0.1
 */
 #ifndef _JUSTINAHRI_H_
