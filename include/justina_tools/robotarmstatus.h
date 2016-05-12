@@ -4,7 +4,7 @@
  * corresponding status topics.
  *
  * @author R. Nonato Lagunas (nonato)
- * @author Marco Negrete (nonato)
+ * @author Marco Negrete 
  * @version 0.1
 */
 #ifndef _JUSTINA_ROBOTARMSTATUS_H_
@@ -92,7 +92,7 @@ class RobotArmStatus
         /**
          * @brief Method to subscribe to the topics.
          *
-         * @param nh 
+         * @param nh[in] a ROS node handle. 
          */
         void prepareRosConnection(ros::NodeHandle *nh);
 
@@ -134,8 +134,9 @@ class RobotArmStatus
          * 
          * Creates a new RobotArmStatus object.
          *
-         * @param nh The ROS Node Handler of the calling node. If no node 
+         * @param nh[in] The ROS Node Handler of the calling node. If no node 
          * handler is provided then a new one will be created.
+         * @param armDOF The degree of freedoms of the robot arm.
          * @param armCurrentPoseTopic The name of the arm current pose topic.
          * @param armCurrentGripperTopic The name of the arm current gripper 
          * topic.
@@ -167,7 +168,7 @@ class RobotArmStatus
         /**
          * @brief Initialize the communication of the object with ROS.
          *
-         * @param nh The ROS node handler of the calling node. If no node 
+         * @param nh[in] The ROS node handler of the calling node. If no node 
          * handler provided, the the node will create one later.
          */
         void initRosConnection(ros::NodeHandle *nh);
@@ -189,7 +190,7 @@ class RobotArmStatus
          * The calling of this function causes that the arm moves to a desired
          * pose indicating by an angles vector.
          *
-         * @param goalAngles The vector of goal angles to move the arm to.
+         * @param goalAngles[in] The vector of goal angles to move the arm to.
          * @return void.
          */
         void setGoalPose(std::vector<float> &goalAngles);
@@ -208,7 +209,7 @@ class RobotArmStatus
          * @brief Change the status of the robot arm goal torques by updating
          * its corresponding ROS topic.
          *
-         * @param goalTorques The value of the torques to update (the new 
+         * @param goalTorques[in] The value of the torques to update (the new 
          * value of the topic).
          * @return void.
          */
