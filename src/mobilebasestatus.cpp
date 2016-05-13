@@ -16,6 +16,14 @@ MobileBaseStatus::MobileBaseStatus(ros::NodeHandle *nh, int mbMotors,
 
 void MobileBaseStatus::initRosConnection(ros::NodeHandle *nh)
 {
+    if(m_isInitialized)
+    {
+        /**
+         * TODO: Print warning saying that the class is currently initialized.
+         */
+        return;
+    }
+
     m_nh = nh;
     /**
      * Subscribe to the arm ros topics if the communication with 
