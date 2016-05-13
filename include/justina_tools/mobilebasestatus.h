@@ -20,7 +20,8 @@ class MobileBaseStatus
 {
     private:
 
-        ros::NodeHandle *m_nh;
+        ros::NodeHandle *m_nh; /**< Stores the nodehandler used for the 
+                                 subscriptions to topics/services. */
 
         bool m_isInitialized; /**< Indicates if the object is conncected with
                                ROS */
