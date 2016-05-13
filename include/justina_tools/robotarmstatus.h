@@ -19,6 +19,9 @@ class RobotArmStatus
 {
     private:
 
+        ros::NodeHandle *m_nh; /**< Stores the nodehandler used for the 
+                                 subscriptions to topics/services. */
+
         bool m_isInitialized; /**< Indicates if the object is conncected with
                                ROS */
 
@@ -91,10 +94,8 @@ class RobotArmStatus
                         has. */
         /**
          * @brief Method to subscribe to the topics.
-         *
-         * @param nh[in] a ROS node handle. 
          */
-        void prepareRosConnection(ros::NodeHandle *nh);
+        void prepareRosConnection();
 
         /**
          * @brief Arm current gripper value callback.
@@ -171,7 +172,7 @@ class RobotArmStatus
          * @param nh[in] The ROS node handler of the calling node. If no node 
          * handler provided, the the node will create one later.
          */
-        void initRosConnection(ros::NodeHandle *nh);
+        void initRosConnection(ros::NodeHandle *nh=0);
         
         /*
          * @brief Change the status of the robot arm gripper by updating it

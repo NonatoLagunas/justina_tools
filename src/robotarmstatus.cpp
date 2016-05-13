@@ -24,24 +24,36 @@ RobotArmStatus::RobotArmStatus(ros::NodeHandle *nh, int armDOF,
      * ROS is initialized.
      */
     m_isInitialized = false; 
+    initRosConnection(m_nh);
+}
+
+void RobotArmStatus::initRosConnection(ros::NodeHandle *nh)
+{
+    m_nh = nh;
+    /**
+     * Subscribe to the arm ros topics if the communication with 
+     * ROS is initialized.
+     */
     if(ros::isInitialized())
     {
         /**
          * If no node handler provided, then create a new one.
          */
-        if(nh == 0)
+        if(m_nh == 0)
         {
-            nh = new ros::NodeHandle;
+            m_nh = new ros::NodeHandle;
         }
-
         /*
          * Initialize subscribers, publishers and verification.
          */
-        prepareRosConnection(nh);
+        prepareRosConnection();
     }
-    /*
-     * TODO: Print error message if ros is not initialized.
-     */
+    else
+    {
+        /*
+         * TODO: Print error message if ros is not initialized.
+         */
+    }
 }
 
 void RobotArmStatus::setArmGoalTorque(std::vector<float> &goalTorques)
@@ -55,7 +67,11 @@ void RobotArmStatus::setArmGoalTorque(std::vector<float> &goalTorques)
         goalTorquesMsg.data = goalTorques;
         m_pubArmGoalTorque.publish(goalTorquesMsg);
     }
-    else {}
+    else 
+    {
+        m_pubArmGoalTorque = m_nh->advertise<std_msgs::Float32MultiArray>(
+                m_armGoalTorqueTopic, 100);
+    }
 }
 
 void RobotArmStatus::setTorqueGrip(float torqueGrip)
@@ -69,7 +85,11 @@ void RobotArmStatus::setTorqueGrip(float torqueGrip)
         torqueGripMsg.data = torqueGrip;
         m_pubArmTorqueGrip.publish(torqueGripMsg);
     }
-    else {}
+    else
+    {
+        m_pubArmTorqueGrip = m_nh->advertise<std_msgs::Float32>(
+                m_armGripperTorqueTopic, 100);
+    }
 }
 
 void RobotArmStatus::setGoalGripper(float goalGripper)
@@ -83,7 +103,11 @@ void RobotArmStatus::setGoalGripper(float goalGripper)
         goalGripperMsg.data = goalGripper;
         m_pubArmGoalGripper.publish(goalGripperMsg);
     }
-    else {}
+    else 
+    {
+        m_pubArmGoalGripper = m_nh->advertise<std_msgs::Float32>(
+                m_armGoalGripperTopic, 100);
+    }
 }
 
 void RobotArmStatus::setGoalPose(std::vector<float> &goalAngles)
@@ -97,33 +121,11 @@ void RobotArmStatus::setGoalPose(std::vector<float> &goalAngles)
         goalPoseMsg.data = goalAngles;
         m_pubArmGoalPose.publish(goalPoseMsg);
     }
-    else {}
-}
-
-void RobotArmStatus::initRosConnection(ros::NodeHandle *nh)
-{
-    /**
-     * Subscribe to the arm ros topics if the communication with 
-     * ROS is initialized.
-     */
-    if(ros::isInitialized())
+    else 
     {
-        /**
-         * If no node handler provided, then create a new one.
-         */
-        if(nh == 0)
-        {
-            nh = new ros::NodeHandle;
-        }
-        /*
-         * Initialize subscribers, publishers and verification.
-         */
-        prepareRosConnection(nh);
-        return;
+        m_pubArmGoalPose = m_nh->advertise<std_msgs::Float32MultiArray>(
+                m_armGoalPoseTopic, 100);
     }
-    /*
-     * TODO: Print error message if ros is not initialized.
-     */
 }
 
 void RobotArmStatus::armCurrentPoseCallback(
@@ -175,7 +177,7 @@ int RobotArmStatus::getArmBatteryPerc()
     return m_armBatteryPerc; 
 }
 
-void RobotArmStatus::prepareRosConnection(ros::NodeHandle *nh)
+void RobotArmStatus::prepareRosConnection()
 {
     /*
      * TODO: Print error messages if one of the object could not be 
@@ -183,7 +185,7 @@ void RobotArmStatus::prepareRosConnection(ros::NodeHandle *nh)
      */
     if(!m_subArmCurrentGripper)
     {
-        if((m_subArmCurrentGripper=nh->subscribe(m_armCurrentGripperTopic, 100, 
+        if((m_subArmCurrentGripper=m_nh->subscribe(m_armCurrentGripperTopic, 100, 
                         &RobotArmStatus::armCurrentGripperCallback, this)))
         {
             m_isInitialized = true; 
@@ -191,7 +193,7 @@ void RobotArmStatus::prepareRosConnection(ros::NodeHandle *nh)
     }
     if(!m_subArmCurrentPose)
     {
-        if((m_subArmCurrentPose= nh->subscribe(m_armCurrentPoseTopic, 100, 
+        if((m_subArmCurrentPose= m_nh->subscribe(m_armCurrentPoseTopic, 100, 
                 &RobotArmStatus::armCurrentPoseCallback, this)))
         {
             m_isInitialized = true; 
@@ -199,7 +201,7 @@ void RobotArmStatus::prepareRosConnection(ros::NodeHandle *nh)
     }
     if(!m_subArmCurrentBattery)
     {
-        if((m_subArmCurrentBattery=nh->subscribe(m_armCurrentBatteryTopic, 100, 
+        if((m_subArmCurrentBattery=m_nh->subscribe(m_armCurrentBatteryTopic, 100, 
                 &RobotArmStatus::armCurrentBatteryCallback, this)))
         {
             m_isInitialized = true; 
@@ -207,7 +209,7 @@ void RobotArmStatus::prepareRosConnection(ros::NodeHandle *nh)
     }
     if(!m_pubArmGoalGripper)
     {
-        if((m_pubArmGoalGripper = nh->advertise<std_msgs::Float32>(
+        if((m_pubArmGoalGripper = m_nh->advertise<std_msgs::Float32>(
                 m_armGoalGripperTopic, 100)))
         {
             m_isInitialized = true; 
@@ -215,7 +217,7 @@ void RobotArmStatus::prepareRosConnection(ros::NodeHandle *nh)
     }
     if(!m_pubArmGoalPose)
     {
-        if((m_pubArmGoalPose = nh->advertise<std_msgs::Float32MultiArray>(
+        if((m_pubArmGoalPose = m_nh->advertise<std_msgs::Float32MultiArray>(
                 m_armGoalPoseTopic, 100)))
         {
             m_isInitialized = true; 
@@ -223,7 +225,7 @@ void RobotArmStatus::prepareRosConnection(ros::NodeHandle *nh)
     }
     if(!m_pubArmTorqueGrip)
     {
-        if((m_pubArmTorqueGrip = nh->advertise<std_msgs::Float32>(
+        if((m_pubArmTorqueGrip = m_nh->advertise<std_msgs::Float32>(
                 m_armGripperTorqueTopic, 100)))
         {
             m_isInitialized = true; 
@@ -231,7 +233,7 @@ void RobotArmStatus::prepareRosConnection(ros::NodeHandle *nh)
     }
     if(!m_pubArmGoalTorque)
     {
-        if((m_pubArmGoalTorque = nh->advertise<std_msgs::Float32MultiArray>(
+        if((m_pubArmGoalTorque = m_nh->advertise<std_msgs::Float32MultiArray>(
                 m_armGoalTorqueTopic, 100)))
         {
             m_isInitialized = true; 
