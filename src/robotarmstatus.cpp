@@ -58,9 +58,11 @@ void RobotArmStatus::initRosConnection(ros::NodeHandle *nh)
 
 void RobotArmStatus::setArmGoalTorque(std::vector<float> &goalTorques)
 {
-    /**
-     * TODO: Print error message if the publisher is not valid.
-     */
+    if(!m_pubArmGoalTorque)
+    {
+        m_pubArmGoalTorque = m_nh->advertise<std_msgs::Float32MultiArray>(
+                m_armGoalTorqueTopic, 100);
+    }
     if(m_pubArmGoalTorque)
     {
         std_msgs::Float32MultiArray goalTorquesMsg;
@@ -69,16 +71,19 @@ void RobotArmStatus::setArmGoalTorque(std::vector<float> &goalTorques)
     }
     else 
     {
-        m_pubArmGoalTorque = m_nh->advertise<std_msgs::Float32MultiArray>(
-                m_armGoalTorqueTopic, 100);
+        /**
+         * TODO: Print error message if the publisher is not valid.
+         */
     }
 }
 
 void RobotArmStatus::setTorqueGrip(float torqueGrip)
 {
-    /**
-     * TODO: Print error message if the publisher is not valid.
-     */
+    if(!m_pubArmTorqueGrip)
+    {
+        m_pubArmTorqueGrip = m_nh->advertise<std_msgs::Float32>(
+                m_armGripperTorqueTopic, 100);
+    }
     if(m_pubArmTorqueGrip)
     {
         std_msgs::Float32 torqueGripMsg;
@@ -87,16 +92,19 @@ void RobotArmStatus::setTorqueGrip(float torqueGrip)
     }
     else
     {
-        m_pubArmTorqueGrip = m_nh->advertise<std_msgs::Float32>(
-                m_armGripperTorqueTopic, 100);
+        /**
+         * TODO: Print error message if the publisher is not valid.
+         */
     }
 }
 
 void RobotArmStatus::setGoalGripper(float goalGripper)
 {
-    /**
-     * TODO: Print error message if the publisher is not valid.
-     */
+    if(!m_pubArmGoalGripper)
+    {
+        m_pubArmGoalGripper = m_nh->advertise<std_msgs::Float32>(
+                m_armGoalGripperTopic, 100);
+    }
     if(m_pubArmGoalGripper)
     {
         std_msgs::Float32 goalGripperMsg;
@@ -105,16 +113,19 @@ void RobotArmStatus::setGoalGripper(float goalGripper)
     }
     else 
     {
-        m_pubArmGoalGripper = m_nh->advertise<std_msgs::Float32>(
-                m_armGoalGripperTopic, 100);
+        /**
+         * TODO: Print error message if the publisher is not valid.
+         */
     }
 }
 
 void RobotArmStatus::setGoalPose(std::vector<float> &goalAngles)
 {
-    /**
-     * TODO: Print error message if the publisher is not valid.
-     */
+    if(!m_pubArmGoalPose)
+    {
+        m_pubArmGoalPose = m_nh->advertise<std_msgs::Float32MultiArray>(
+                m_armGoalPoseTopic, 100);
+    }
     if(m_pubArmGoalPose)
     {
         std_msgs::Float32MultiArray goalPoseMsg;
@@ -123,8 +134,9 @@ void RobotArmStatus::setGoalPose(std::vector<float> &goalAngles)
     }
     else 
     {
-        m_pubArmGoalPose = m_nh->advertise<std_msgs::Float32MultiArray>(
-                m_armGoalPoseTopic, 100);
+        /**
+         * TODO: Print error message if the publisher is not valid.
+         */
     }
 }
 

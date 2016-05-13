@@ -43,7 +43,6 @@ void MobileBaseStatus::initRosConnection(ros::NodeHandle *nh)
     }
 }
 
-
 void MobileBaseStatus::prepareRosConnection()
 {
     /*
@@ -70,6 +69,14 @@ void MobileBaseStatus::prepareRosConnection()
 
 void MobileBaseStatus::setMobileBaseSpeeds(std::vector<float> &speedsVector)
 {
+    if(!m_pubMBSpeeds)
+    {
+        /**
+         * Try to connect.
+         */
+        m_pubMBSpeeds = m_nh->advertise<std_msgs::Float32MultiArray>(
+                m_mbSpeedsTopic, 100);
+    }
     if(m_pubMBSpeeds)
     {
         /**
@@ -85,16 +92,22 @@ void MobileBaseStatus::setMobileBaseSpeeds(std::vector<float> &speedsVector)
     else
     {
         /**
-         * Try to connect.
+         * TODO: Print error message if the publisher is not valid.
          */
-        m_pubMBSpeeds = m_nh->advertise<std_msgs::Float32MultiArray>(
-                m_mbSpeedsTopic, 100);
     }
 }
 
 void MobileBaseStatus::setMobileBaseCmdVel(float linearX, float linearY, 
         float angular)
 {
+    if(!m_pubMBCmdVel)
+    {
+        /**
+         * Try to connect.
+         */
+        m_pubMBCmdVel = m_nh->advertise<geometry_msgs::Twist>(
+                m_mbCmdVelTopic, 100);
+    }
     if(m_pubMBCmdVel)
     {
         geometry_msgs::Twist cvMsg;
@@ -109,9 +122,7 @@ void MobileBaseStatus::setMobileBaseCmdVel(float linearX, float linearY,
     else
     {
         /**
-         * Try to connect.
+         * TODO: Print error message if the publisher is not valid.
          */
-        m_pubMBCmdVel = m_nh->advertise<geometry_msgs::Twist>(
-                m_mbCmdVelTopic, 100);
     }
 }
