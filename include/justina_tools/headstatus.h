@@ -14,24 +14,49 @@
 #include <string>
 #include "ros/ros.h"
 #include "std_msgs/Float32MultiArray.h"
+#include "std_msgs/Float32.h"
+
 class HeadStatus
 {
     private:
-        ros::Subscriber m_subHeadCurrentPose; /**< ROS subscriber to the head
-                                                pose topic */
-
-        ros::Publisher m_headPosePublisher; /**< ROS publisher for the head
-                                              pose topic*/
+        ros::NodeHandle *m_nh; /**< Stores the nodehandler used for the 
+                                 subscriptions to topics/services. */
 
         bool m_isInitialized; /**< Indicates if the object is conncected with
                                ROS */
 
+        ros::Subscriber m_subHeadCurrentPose; /**< ROS subscriber to the head
+                                                pose topic */
+
+        ros::Subscriber m_subHeadCurrentBattery; /**< ROS subscriber to the 
+                                                   head battery topic. */
+
+        ros::Publisher m_headPosePublisher; /**< ROS publisher for the head
+                                              pose topic*/
+
         std::string m_headPoseTopic; /**< Stores the name of the topic from 
                                        where the head status will be obtained*/
+
+        std::string m_headBatteryTopic; /**< Stores the name of the topic from 
+                                          where the head battery status will be
+                                          obtained*/
 
         float m_headPan; /**< Stores the current robot's head pan */
 
         float m_headTilt; /**< Stores the current robot's head tilt*/
+
+        float m_headBattery; /**< Stores the robot's battery level. */
+
+        /**
+         * @brief Head current battery callback
+         * 
+         * Updates the robot's head battery when the corresponding topic is
+         * updated.
+         *
+         * @param batteryMsg The new value of the topic when it's updated. 
+         */
+        void headBatteryCallback(
+                const std_msgs::Float32::ConstPtr& batteryMsg);
 
         /**
          * @brief Head current pose callback
@@ -43,6 +68,11 @@ class HeadStatus
          */
         void headPoseCallback(
                 const std_msgs::Float32MultiArray::ConstPtr& poseMsg);
+
+        /**
+         * @brief Method to subscribe to the topics.
+         */
+        void prepareRosConnection();
     public:
         /**
          * @brief Class constructor
@@ -53,8 +83,12 @@ class HeadStatus
          * @param headPoseTopic The name of the topic which will be updated
          * when the robot's head pose information.
          */
-        HeadStatus(ros::NodeHandle *nh = 0, std::string headPoseTopic = 
-                "/hardware/head/current_pose");
+        HeadStatus(ros::NodeHandle *nh = 0, 
+                std::string headPoseTopic = 
+                "/hardware/head/current_pose", 
+                std::string headBatteryTopic = 
+                "/hardware/robot_state/head_battery"
+                );
         
         /**
          * @brief Initialize the communication of the object with ROS.
@@ -62,7 +96,14 @@ class HeadStatus
          * @param nh The ROS node handler of the calling node. If no node 
          * handler provided, the the node will create one later.
          */
-        void initRosConnection(ros::NodeHandle *nh);
+        void initRosConnection(ros::NodeHandle *nh = 0);
+
+        /**
+         * @brief Returns the value of the current head battery level.
+         * 
+         * @return float.
+         */
+        float getHeadBattery();
 
         /**
          * @brief Returns the value of the current head pan.
