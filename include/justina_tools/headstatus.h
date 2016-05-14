@@ -81,7 +81,9 @@ class HeadStatus
          *
          * @param nh The ROS Node ÇHandler of the simple task planner node.
          * @param headPoseTopic The name of the topic which will be updated
-         * when the robot's head pose information.
+         * when the robot's head pose information change.
+         * @param headBatteryTopic The name of the topic which will be updated
+         * when the robot's head battery information change.
          */
         HeadStatus(ros::NodeHandle *nh = 0, 
                 std::string headPoseTopic = 
