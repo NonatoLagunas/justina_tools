@@ -14,6 +14,8 @@ bool JustinaHRI::setNodeHandle(ros::NodeHandle* nodeHandler)
     if(nodeHandler == 0)
         return false;
 
+    std::cout << "JustinaHRI.->Setting ros node..." << std::endl;
+
     m_sprec.initRosConnection(nodeHandler);
     m_isNodeSet = true;
     return true;

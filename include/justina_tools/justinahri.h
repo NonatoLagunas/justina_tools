@@ -18,6 +18,7 @@
 */
 #ifndef _JUSTINAHRI_H_
 #define _JUSTINAHRI_H_
+#include <iostream>
 #include <string>
 #include "ros/ros.h"
 #include "justina_tools/speechrecognitionstatus.h"
