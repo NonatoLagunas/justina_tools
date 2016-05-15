@@ -34,6 +34,13 @@ class MobileBaseStatus
                                        manage the information of the base 
                                        command velocity topic. */
 
+        std::string m_mbBatteryTopic; /**< Stores the name of the topic which 
+                                        manage the information of the base 
+                                        battery. */
+
+        ros::Subscriber m_subMBBattery; /**< Stores the subscriber for the 
+                                          mobile base battery topic. */
+
         ros::Publisher m_pubMBSpeeds; /**< Stores the publisher for the mobile
                                         base speeds topic. */
 
@@ -42,10 +49,23 @@ class MobileBaseStatus
 
         int m_mbMotors; /**< Stores the number of motors on the mobile base. */
 
+        float m_mbBattery; /**< Stores the battery level of the mobile base. */
+
         /**
          * @brief Method to subscribe to the topics.
          */
         void prepareRosConnection();
+
+        /**
+         * @brief Mobile base current battery level callback.
+         * 
+         * Updates the mobile base battery level when the corresponding topic
+         * is updated.
+         *
+         * @param batteryMsg The new value of the topic when it's updated. 
+         */
+        void mbBatteryCallback(
+                const std_msgs::Float32::ConstPtr& batteryMsg);
 
     public:
         /**
@@ -63,8 +83,12 @@ class MobileBaseStatus
         MobileBaseStatus( 
                 ros::NodeHandle *nh = 0,
                 int mbMotors = 7,
-                std::string mbSpeedsTopic = "/hardware/mobile_base/speeds",
-                std::string mbCmdVelTopic = "/hardware/mobile_base/cmd_vel"
+                std::string mbSpeedsTopic = 
+                "/hardware/mobile_base/speeds",
+                std::string mbCmdVelTopic = 
+                "/hardware/mobile_base/cmd_vel",
+                std::string mbBatteryTopic = 
+                "/hardware/robot_state/base_battery"
                 );
 
         /**
@@ -75,7 +99,7 @@ class MobileBaseStatus
          */
         void initRosConnection(ros::NodeHandle *nh=0);
         
-        /*
+        /**
          * @brief Change the status of the robot mobile base speed by updating 
          * it corresponding ROS topic.
          *
@@ -87,7 +111,7 @@ class MobileBaseStatus
          */
         void setMobileBaseSpeeds(std::vector<float> &speedsVector);
 
-        /*
+        /**
          * @brief Send a mobile base command velocity to move the robot's 
          * mobile base.
          *
@@ -98,5 +122,11 @@ class MobileBaseStatus
          */
         void setMobileBaseCmdVel(float linearX, float linearY, float angular);
 
+        /**
+         * @brief Returns the current mobile base battery level.
+         *
+         * @return The battery level.
+         */
+        float getMobileBaseBattery();
 };
 #endif

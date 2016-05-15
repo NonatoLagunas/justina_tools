@@ -1,11 +1,13 @@
 #include "justina_tools/mobilebasestatus.h"
 
 MobileBaseStatus::MobileBaseStatus(ros::NodeHandle *nh, int mbMotors,
-        std::string mbSpeedsTopic, std::string mbCmdVelTopic) : 
+        std::string mbSpeedsTopic, std::string mbCmdVelTopic, 
+        std::string mbBatteryTopic) : 
     m_nh(nh), 
     m_mbMotors(mbMotors), 
     m_mbSpeedsTopic(mbSpeedsTopic), 
-    m_mbCmdVelTopic(mbCmdVelTopic)
+    m_mbCmdVelTopic(mbCmdVelTopic),
+    m_mbBatteryTopic(mbBatteryTopic)
 {
     m_isInitialized = false; 
     /**
@@ -73,6 +75,20 @@ void MobileBaseStatus::prepareRosConnection()
             m_isInitialized = true; 
         } else {}
     }
+    if(!m_subMBBattery)
+    {
+        if((m_subMBBattery = m_nh->subscribe(m_mbBatteryTopic, 100, 
+                        &MobileBaseStatus::mbBatteryCallback, this)))
+        {
+            m_isInitialized = true;
+        } else {}
+    }
+}
+
+void MobileBaseStatus::mbBatteryCallback(
+        const std_msgs::Float32::ConstPtr& batteryMsg)
+{
+    m_mbBattery = batteryMsg->data;
 }
 
 void MobileBaseStatus::setMobileBaseSpeeds(std::vector<float> &speedsVector)
@@ -133,4 +149,8 @@ void MobileBaseStatus::setMobileBaseCmdVel(float linearX, float linearY,
          * TODO: Print error message if the publisher is not valid.
          */
     }
+}
+float MobileBaseStatus::getMobileBaseBattery()
+{
+    return m_mbBattery;
 }
