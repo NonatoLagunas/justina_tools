@@ -9,6 +9,8 @@ set(
     "hardware"
 	"hri"
 	"planning"
+	"navigation"
+	"manipulation"
 )
 
 foreach(DEP ${TASK_PLANER_DEP})
