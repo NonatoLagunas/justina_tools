@@ -25,8 +25,8 @@ class Transformations
         ros::NodeHandle *m_nh; /**< Stores the nodehandler used for the 
                                  subscriptions to topics/services. */
 
-        bool m_connectionInitialized; /**< Indicates if the object is conncected with
-                               ROS */
+        bool m_connectionInitialized; /**< Indicates if the object is 
+                                        conncected with ROS */
 
         std::string m_IKFloatArrayServiceName; /**< Stores the name of the 
                                                  service which perform the 
