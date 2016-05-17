@@ -58,7 +58,7 @@ class RobotStatus
          */
         void initRosConnection(ros::NodeHandle *nh=0);
         
-        /*
+        /**
          * @brief Sends a stop signal to the stop indication topic.
          *
          * @return void.

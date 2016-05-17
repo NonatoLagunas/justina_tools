@@ -174,7 +174,7 @@ class RobotArmStatus
          */
         void initRosConnection(ros::NodeHandle *nh=0);
         
-        /*
+        /**
          * @brief Change the status of the robot arm gripper by updating it
          * corresponding ROS topic.
          *
@@ -184,7 +184,7 @@ class RobotArmStatus
          */
         void setGoalGripper(float goalGripper);
 
-        /*
+        /**
          * @brief Change the status of the robot arm goal pose by updating its 
          * corresponding ROS topic.
          *
@@ -196,7 +196,7 @@ class RobotArmStatus
          */
         void setGoalPose(std::vector<float> &goalAngles);
 
-        /*
+        /**
          * @brief Change the status of the robot arm torque gripper by 
          * updating it corresponding ROS topic.
          *

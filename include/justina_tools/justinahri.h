@@ -89,13 +89,13 @@ class JustinaHRI
          */
         static bool say(std::string textToSpeech, int timeout);
 
-        /*
+        /**
          * @brief Enable the follow human mode on the robot. 
          * (Not implemente yet).
          */
         static void startFollowHuman();
 
-        /*
+        /**
          * @brief Disable the follow human mode on the robot. 
          * (Not implemente yet).
          */
