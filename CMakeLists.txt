@@ -16,7 +16,12 @@ find_package(catkin REQUIRED COMPONENTS
   hri_msgs
   planning_msgs
   language_understanding
+  tf
 )
+find_package(Boost REQUIRED COMPONENTS
+    thread
+    chrono
+    )
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -24,6 +29,7 @@ find_package(catkin REQUIRED COMPONENTS
 include_directories(
     include
     ${catkin_INCLUDE_DIRS}
+    ${Boost_INCLUDE_DIRS}
 )
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -115,7 +121,7 @@ catkin_package(
   INCLUDE_DIRS include
   LIBRARIES justina_tools
   CATKIN_DEPENDS roscpp rospy std_msgs message_generation
-#  DEPENDS system_lib
+  DEPENDS Boost
 )
 
 ###########
@@ -151,6 +157,7 @@ file(GLOB_RECURSE sources "include/justina_tools/*.c*" "src/*.c*")
 ## Specify libraries to link a library or executable target against
  target_link_libraries(justina_tools
    ${catkin_LIBRARIES}
+   ${Boost_LIBRARIES}
  )
 ### Specify libraries to link a library or executable target against
 #target_link_libraries(
