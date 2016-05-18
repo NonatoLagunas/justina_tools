@@ -187,6 +187,7 @@ void NavigationStatus::currentRobotPoseCallback(
 
 void NavigationStatus::setGoalDist(float t_distance)
 {
+    m_isGoalReached = false;
     if(!m_moveGoalDistPub)
     {
         m_moveGoalDistPub = m_nh->advertise<std_msgs::Float32>(
@@ -208,6 +209,7 @@ void NavigationStatus::setGoalDist(float t_distance)
 
 void NavigationStatus::setGoalDistAngle(float t_distance, float t_angle)
 {
+    m_isGoalReached = false;
     if(!m_moveGoalDistAnglePub)
     {
         m_moveGoalDistAnglePub = m_nh->advertise<std_msgs::Float32MultiArray>(
@@ -230,6 +232,7 @@ void NavigationStatus::setGoalDistAngle(float t_distance, float t_angle)
 
 void NavigationStatus::setGoalPath(nav_msgs::Path &t_path)
 {
+    m_isGoalReached = false;
     if(!m_moveGoalPathPub)
     {
         m_moveGoalPathPub= m_nh->advertise<nav_msgs::Path>(
@@ -249,6 +252,7 @@ void NavigationStatus::setGoalPath(nav_msgs::Path &t_path)
 
 void NavigationStatus::setGoalPose(float t_x, float t_y, float t_angle)
 {
+    m_isGoalReached = false;
     if(!m_moveGoalPosePub)
     {
         m_moveGoalPosePub = m_nh->advertise<geometry_msgs::Pose2D>(
@@ -273,6 +277,7 @@ void NavigationStatus::setGoalPose(float t_x, float t_y, float t_angle)
 void NavigationStatus::setGoalRelPose(float t_relX, float t_relY, 
         float t_relAngle)
 {
+    m_isGoalReached = false;
     if(!m_moveGoalRelPosePub)
     {
         m_moveGoalRelPosePub= m_nh->advertise<geometry_msgs::Pose2D>(
@@ -296,6 +301,7 @@ void NavigationStatus::setGoalRelPose(float t_relX, float t_relY,
 
 void NavigationStatus::setGetCloseGoal(float t_x, float t_y)
 {
+    m_isGoalReached = false;
     if(!m_getCloseXYAPub)
     {
         m_getCloseXYAPub = m_nh->advertise<std_msgs::Float32MultiArray>(
@@ -318,6 +324,7 @@ void NavigationStatus::setGetCloseGoal(float t_x, float t_y)
 
 void NavigationStatus::setGetCloseGoal(float t_x, float t_y, float t_angle)
 {
+    m_isGoalReached = false;
     if(!m_getCloseXYAPub)
     {
         m_getCloseXYAPub = m_nh->advertise<std_msgs::Float32MultiArray>(
@@ -341,6 +348,7 @@ void NavigationStatus::setGetCloseGoal(float t_x, float t_y, float t_angle)
 
 void NavigationStatus::setGetCloseGoal(std::string t_goalName)
 {
+    m_isGoalReached = false;
     if(!m_getCloseLocPub)
     {
         m_getCloseLocPub = m_nh->advertise<std_msgs::String>(
