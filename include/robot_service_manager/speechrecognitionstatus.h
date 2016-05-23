@@ -11,6 +11,7 @@
 #ifndef _JUSTINA_SPRECSTATUS_H
 #define _JUSTINA_SPRECSTATUS_H
 #include <string>
+#include <vector>
 #include <queue>
 #include "ros/ros.h"
 #include "hri_msgs/RecognizedSpeech.h"
@@ -140,7 +141,20 @@ class SpeechRecognitionStatus
         /**
          * @brief Returns the last recognized sentence with the highest 
          * hypothesis.
+         *
+         * @return A standard string with the highest hypothesis.
          */
         std::string getLastRecognizedSentence();
+
+        /**
+         * @brief Returns the recognized sentences listened during the listen 
+         * mode. 
+         *
+         * The sentences will be returned ordered by its confidence (the 
+         * highest confidence at the top of the list).
+         * 
+         * @param[out] t_sentences The list of sentences ordered by confidence.
+         */
+        void getListenedSentences(std::vector<std::string> &t_sentences);
 };
 #endif
