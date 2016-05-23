@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>justina_tools</name>
+  <name>robot_service_manager</name>
   <version>0.0.0</version>
-  <description>The justina_tools package</description>
+  <description>The robot_service_manager package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
   <!-- Example:  -->

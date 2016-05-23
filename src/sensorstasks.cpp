@@ -1,4 +1,4 @@
-#include "justina_tools/sensorstasks.h"
+#include "robot_service_manager/sensorstasks.h"
 
 SensorsTasks::SensorsTasks(ros::NodeHandle *t_nh, 
         std::string t_srvGetKinnectRGBDName, 

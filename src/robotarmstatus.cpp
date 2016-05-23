@@ -1,4 +1,4 @@
-#include "justina_tools/robotarmstatus.h"
+#include "robot_service_manager/robotarmstatus.h"
 
 RobotArmStatus::RobotArmStatus(ros::NodeHandle *nh, int armDOF,
         std::string armCurrentPoseTopic, std::string armCurrentGripperTopic,

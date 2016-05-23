@@ -1,4 +1,4 @@
-#include "justina_tools/langunderstandingtasks.h"
+#include "robot_service_manager/langunderstandingtasks.h"
 
 LangUnderstandingTasks::LangUnderstandingTasks (
         std::string parseSentenceServName) : m_parseSentenceServName(

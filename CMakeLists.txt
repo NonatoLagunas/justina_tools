@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 include (${CMAKE_CURRENT_SOURCE_DIR}/dummy/DepCheck.cmake OPTIONAL)
-project(justina_tools)
+project(robot_service_manager)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -141,7 +141,7 @@ file(GLOB_RECURSE headers "include/justina_tools/*.h*")
 file(GLOB_RECURSE sources "include/justina_tools/*.c*" "src/*.c*")
 
 ## Declare a C++ library
- add_library(justina_tools
+ add_library(robot_service_manager
      ${sources}
      #src/${PROJECT_NAME}/justina_tools.cpp
  )
@@ -149,7 +149,7 @@ file(GLOB_RECURSE sources "include/justina_tools/*.c*" "src/*.c*")
 ## Add cmake target dependencies of the library
 ## as an example, code may need to be generated before libraries
 ## either from message generation or dynamic reconfigure
- add_dependencies(justina_tools ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+ add_dependencies(robot_service_manager ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
 # add_executable(justina_tools_node src/justina_tools_node.cpp)
@@ -160,7 +160,8 @@ file(GLOB_RECURSE sources "include/justina_tools/*.c*" "src/*.c*")
 # add_dependencies(justina_tools_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
- target_link_libraries(justina_tools
+ target_link_libraries(
+   robot_service_manager 
    ${catkin_LIBRARIES}
    ${Boost_LIBRARIES}
    ${PCL_LIBRARIES}

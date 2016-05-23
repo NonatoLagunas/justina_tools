@@ -1,4 +1,4 @@
-#include "justina_tools/navigationstatus.h"
+#include "robot_service_manager/navigationstatus.h"
 
 NavigationStatus::NavigationStatus(ros::NodeHandle *t_nh, 
         std::string t_goalReachedTopicName, 
