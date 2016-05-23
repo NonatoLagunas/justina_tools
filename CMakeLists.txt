@@ -15,13 +15,16 @@ find_package(catkin REQUIRED COMPONENTS
   bbros_bridge
   hri_msgs
   planning_msgs
-  language_understanding
   tf
+  pcl_conversions
+  tf_conversions
 )
 find_package(Boost REQUIRED COMPONENTS
     thread
     chrono
     )
+find_package(PCL REQUIRED)
+find_package(OpenCV REQUIRED)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -30,6 +33,8 @@ include_directories(
     include
     ${catkin_INCLUDE_DIRS}
     ${Boost_INCLUDE_DIRS}
+    ${PCL_INCLUDE_DIRS}
+    ${OpenCV_INCLUDE_DIRS}
 )
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -120,8 +125,8 @@ include_directories(
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES justina_tools
-  CATKIN_DEPENDS roscpp rospy std_msgs message_generation
-  DEPENDS Boost
+  CATKIN_DEPENDS roscpp rospy std_msgs message_generation pcl_conversions
+  DEPENDS Boost PCL opencv
 )
 
 ###########
@@ -158,6 +163,8 @@ file(GLOB_RECURSE sources "include/justina_tools/*.c*" "src/*.c*")
  target_link_libraries(justina_tools
    ${catkin_LIBRARIES}
    ${Boost_LIBRARIES}
+   ${PCL_LIBRARIES}
+   ${OpenCV_LIBS}
  )
 ### Specify libraries to link a library or executable target against
 #target_link_libraries(

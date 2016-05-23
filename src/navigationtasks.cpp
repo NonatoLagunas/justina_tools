@@ -4,15 +4,13 @@ NavigationTasks::NavigationTasks(ros::NodeHandle *t_nh,
         std::string t_getOccupancyGridSrvName,
         std::string t_calcAStarPathFromMapSrvName,
         std::string t_calcWaveFrontPathFromMapSrvName,
-        std::string t_calcAStarPathFromAllSrvName,
-        std::string t_calcWaveFrontPathFromAllSrvName
+        std::string t_planPathSrvName
         ) :
     m_nh(t_nh),
     m_getOccupancyGridSrvName(t_getOccupancyGridSrvName),
     m_calcAStarPathFromMapSrvName(t_calcAStarPathFromMapSrvName),
     m_calcWaveFrontPathFromMapSrvName(t_calcWaveFrontPathFromMapSrvName),
-    m_calcAStarPathFromAllSrvName(t_calcAStarPathFromAllSrvName),
-    m_calcWaveFrontPathFromAllSrvName(t_calcWaveFrontPathFromAllSrvName)
+    m_planPathSrvName(t_planPathSrvName)
 {
     m_connectionInitialized = false; 
     initRosConnection(m_nh);
@@ -82,24 +80,16 @@ void NavigationTasks::prepareRosConnection()
     if(!m_calcWaveFrontPathFromMapSrv)
     {
         if((m_calcWaveFrontPathFromMapSrv=m_nh->serviceClient<
-                    navig_msgs::PathFromMap>(m_calcWaveFrontPathFromMapSrvName)))
+                    navig_msgs::PathFromMap>(
+                        m_calcWaveFrontPathFromMapSrvName)))
         {
             m_connectionInitialized = true;
         } else {}
     }
-    if(!m_calcAStarPathFromAllSrv)
+    if(!m_planPathSrv)
     {
-        if((m_calcAStarPathFromAllSrv=m_nh->serviceClient<
-                    navig_msgs::PathFromAll>(m_calcAStarPathFromAllSrvName)))
-        {
-            m_connectionInitialized = true;
-        } else {}
-    }
-    if(!m_calcWaveFrontPathFromAllSrv)
-    {
-        if((m_calcWaveFrontPathFromAllSrv=m_nh->serviceClient<
-                    navig_msgs::PathFromAll>(m_calcWaveFrontPathFromAllSrvName
-                        )))
+        if((m_planPathSrv=m_nh->serviceClient<navig_msgs::PlanPath>(
+                        m_planPathSrvName)))
         {
             m_connectionInitialized = true;
         } else {}
@@ -193,56 +183,6 @@ bool NavigationTasks::calcAStarPathFromMap(float t_startX, float t_startY,
     return false;
 }
 
-bool NavigationTasks::calcAStarPathFromAll(float t_goalX, float t_goalY, 
-        nav_msgs::Path &t_path)
-{
-    //get the current robot pose
-    float robotX, robotY, robotAngle;
-    m_navStatus.getCurrentPose(robotX, robotY, robotAngle);
-    //call to the overriden function
-    return calcAStarPathFromAll(robotX, robotY, t_goalX, t_goalY, t_path);
-}
-bool NavigationTasks::calcAStarPathFromAll(float t_startX, float t_startY, 
-        float t_goalX, float t_goalY, nav_msgs::Path &t_path)
-{
-    if(!m_calcAStarPathFromAllSrv)
-    {
-        m_calcAStarPathFromAllSrv=m_nh->serviceClient<navig_msgs::PathFromAll>(
-                m_calcAStarPathFromAllSrvName);
-    }
-    if(m_calcAStarPathFromAllSrv)
-    {
-        nav_msgs::GetMap srvGetMap;
-        navig_msgs::PathFromAll srvPathFromAll;
-
-        bool success;
-        if((success=m_getOccupancyGridSrv.call(srvGetMap)))
-        {
-            srvPathFromAll.request.map = srvGetMap.response.map;
-            sensor_msgs::PointCloud2 robotPointCloud;
-            if((success=m_sensorsTasks.getRobotRGBD(robotPointCloud)))
-            {
-                srvPathFromAll.request.point_cloud = robotPointCloud;
-                srvPathFromAll.request.start_pose.position.x = t_startX;
-                srvPathFromAll.request.start_pose.position.y = t_startY;
-                srvPathFromAll.request.goal_pose.position.x = t_goalX;
-                srvPathFromAll.request.goal_pose.position.y = t_goalY;
-                
-                success = m_calcAStarPathFromAllSrv.call(srvPathFromAll);
-
-                ros::spinOnce();
-                t_path = srvPathFromAll.response.path;
-            }
-        }
-        return success;
-    }
-    /**
-     * TODO: Print error message if the publisher is not valid.
-     */
-    return false;
-
-}
-
 bool NavigationTasks::calcWaveFrontPathFromMap(float t_goalX, float t_goalY, 
         nav_msgs::Path &t_path)
 {
@@ -287,47 +227,135 @@ bool NavigationTasks::calcWaveFrontPathFromMap(float t_startX, float t_startY,
     return false;
 }
 
-bool NavigationTasks::calcWaveFrontPathFromAll(float t_goalX, float t_goalY, 
-        nav_msgs::Path &t_path)
+bool NavigationTasks::planPath(float t_startX, float t_startY, float t_goalX, 
+        float t_goalY, nav_msgs::Path &t_path)
 {
-    //get the current robot pose
-    float robotX, robotY, robotAngle;
-    m_navStatus.getCurrentPose(robotX, robotY, robotAngle);
-    //call to the overriden function
-    return calcWaveFrontPathFromAll(robotX, robotY, t_goalX, t_goalY, t_path);
+    if(!m_planPathSrv)
+    {
+        m_planPathSrv=m_nh->serviceClient<navig_msgs::PlanPath>(
+                        m_planPathSrvName);
+    }
+    if(m_planPathSrv)
+    {
+        navig_msgs::PlanPath srv;
+        srv.request.start_location_id = "";
+        srv.request.goal_location_id = "";
+        srv.request.start_pose.position.x = t_startX;
+        srv.request.start_pose.position.y = t_startY;
+        srv.request.goal_pose.position.x = t_goalX;
+        srv.request.goal_pose.position.y = t_goalY;
+        bool success = m_planPathSrv.call(srv);
+        t_path = srv.response.path;
+        return success; 
+    }
+    /**
+     * TODO: Print error message if the publisher is not valid.
+     */
+    return false;
 }
 
-bool NavigationTasks::calcWaveFrontPathFromAll(float t_startX, float t_startY, 
-        float t_goalX, float t_goalY, nav_msgs::Path &t_path)
+bool NavigationTasks::planPath(float t_goalX, float t_goalY, 
+        nav_msgs::Path &t_path)
 {
-    if(!m_calcWaveFrontPathFromAllSrv)
-    {
-        m_calcWaveFrontPathFromAllSrv=m_nh->serviceClient<
-            navig_msgs::PathFromAll>(m_calcWaveFrontPathFromAllSrvName);
-    }
-    if(m_calcWaveFrontPathFromAllSrv)
-    {
-        nav_msgs::OccupancyGrid gridMap;
-        sensor_msgs::PointCloud2 robotPointCloud;
-        navig_msgs::PathFromAll srvPathFromAll;
+    float robotX, robotY, robotTheta;
+    m_navStatus.getCurrentPose(robotX, robotY, robotTheta);
+    return planPath(robotX, robotY, t_goalX, t_goalY, 
+            t_path);
+}
 
-        bool success;
-        if((success=getOccupancyGrid(gridMap)))
-        {
-            srvPathFromAll.request.map = gridMap;
-            if((success=m_sensorsTasks.getRobotRGBD(robotPointCloud)))
-            {
-                srvPathFromAll.request.point_cloud = robotPointCloud;
-                srvPathFromAll.request.start_pose.position.x = t_startX;
-                srvPathFromAll.request.start_pose.position.y = t_startY;
-                srvPathFromAll.request.goal_pose.position.x = t_goalX;
-                srvPathFromAll.request.goal_pose.position.y = t_goalY;
-                
-                success = m_calcWaveFrontPathFromAllSrv.call(srvPathFromAll);
-                ros::spinOnce();
-                t_path = srvPathFromAll.response.path;
-            }
-        }
+
+bool NavigationTasks::planPath(std::string t_startLocation, 
+        std::string t_goalLocation, nav_msgs::Path &t_path)
+{
+    if(!m_planPathSrv)
+    {
+        m_planPathSrv=m_nh->serviceClient<navig_msgs::PlanPath>(
+                        m_planPathSrvName);
+    }
+    if(m_planPathSrv)
+    {
+        navig_msgs::PlanPath srv;
+        srv.request.start_location_id = t_startLocation;
+        srv.request.goal_location_id = t_goalLocation;
+        bool success = m_planPathSrv.call(srv);
+        t_path = srv.response.path;
+        return success;
+    }
+    /**
+     * TODO: Print error message if the publisher is not valid.
+     */
+    return false;
+}
+
+bool NavigationTasks::planPath(std::string t_goalLocation, 
+        nav_msgs::Path &t_path)
+{
+    if(!m_planPathSrv)
+    {
+        m_planPathSrv=m_nh->serviceClient<navig_msgs::PlanPath>(
+                        m_planPathSrvName);
+    }
+    if(m_planPathSrv)
+    {
+        float robotX, robotY, robotTheta;
+        m_navStatus.getCurrentPose(robotX, robotY, robotTheta);
+        navig_msgs::PlanPath srv;
+        srv.request.start_location_id = "";
+        srv.request.goal_location_id = t_goalLocation;
+        srv.request.start_pose.position.x = robotX;
+        srv.request.start_pose.position.y = robotY;
+        bool success = m_planPathSrv.call(srv);
+        t_path = srv.response.path;
+        return success;
+    }
+    /**
+     * TODO: Print error message if the publisher is not valid.
+     */
+    return false;
+}
+
+bool NavigationTasks::planPath(std::string t_startLocation, float t_goalX, 
+        float t_goalY, nav_msgs::Path &t_path)
+{
+    if(!m_planPathSrv)
+    {
+        m_planPathSrv=m_nh->serviceClient<navig_msgs::PlanPath>(
+                        m_planPathSrvName);
+    }
+    if(m_planPathSrv)
+    {
+        navig_msgs::PlanPath srv;
+        srv.request.start_location_id = t_startLocation;
+        srv.request.goal_location_id = "";
+        srv.request.goal_pose.position.x = t_goalX;
+        srv.request.goal_pose.position.y = t_goalY;
+        bool success = m_planPathSrv.call(srv);
+        t_path = srv.response.path;
+        return success;
+    }
+    /**
+     * TODO: Print error message if the publisher is not valid.
+     */
+    return false;
+}
+
+bool NavigationTasks::planPath(float t_startX, float t_startY, 
+        std::string t_goalLocation, nav_msgs::Path &t_path)
+{
+    if(!m_planPathSrv)
+    {
+        m_planPathSrv=m_nh->serviceClient<navig_msgs::PlanPath>(
+                        m_planPathSrvName);
+    }
+    if(m_planPathSrv)
+    {
+        navig_msgs::PlanPath srv;
+        srv.request.start_location_id = "";
+        srv.request.goal_location_id = t_goalLocation;
+        srv.request.start_pose.position.x = t_startX;
+        srv.request.start_pose.position.y = t_startY;
+        bool success = m_planPathSrv.call(srv);
+        t_path = srv.response.path;
         return success;
     }
     /**

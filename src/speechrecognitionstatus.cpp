@@ -8,6 +8,7 @@ SpeechRecognitionStatus::SpeechRecognitionStatus(ros::NodeHandle *nh,
      * The listen mode is turned off by default
      */
     m_listenActivated = false;
+    m_sentenceRecognized = false;
 
     /**
      * Subscribe to the recognized speech ros topic if the communication with 
@@ -26,6 +27,7 @@ SpeechRecognitionStatus::SpeechRecognitionStatus(ros::NodeHandle *nh,
         /*
          * Initialize subscribers and verify.
          */
+        
         m_subRecoSpeech = nh->subscribe(m_recoSentencesTopic,
                 100, &SpeechRecognitionStatus::recoSentenceCallback, this);
         if(m_subRecoSpeech)
@@ -94,12 +96,16 @@ void SpeechRecognitionStatus::recoSentenceCallback(const
         m_lastRecoSentencesQueue.push(currentHypothesis);
 
         if(m_listenActivated) 
+        {
             m_listenRecoSentencesQueue.push(currentHypothesis);
+        }
     }
+    m_sentenceRecognized = true;
 }
 
 void SpeechRecognitionStatus::startListening()
 {
+    m_sentenceRecognized = false;
     m_listenActivated = true;
 }
 
@@ -124,5 +130,18 @@ void SpeechRecognitionStatus::clearRecoSentencesQueue (
 void SpeechRecognitionStatus::clearListenedSentencesQueue()
 {
     if(m_listenActivated) 
+    {
         clearRecoSentencesQueue(m_listenRecoSentencesQueue);
+    }
 }
+
+bool SpeechRecognitionStatus::isSentenceRecognized()
+{
+    return m_sentenceRecognized;
+}
+
+std::string SpeechRecognitionStatus::getLastRecognizedSentence()
+{
+    return m_lastRecoSentencesQueue.front().hypothesis;
+}
+

@@ -47,9 +47,10 @@
   <build_depend>bbros_bridge</build_depend>
   <build_depend>hri_msgs</build_depend>
   <build_depend>planning_msgs</build_depend>
-  <build_depend>language_understanding</build_depend>
   <build_depend>tf</build_depend>
+  <build_depend>tf_conversions</build_depend>
   <build_depend>Boost</build_depend>
+  <build_depend>pcl_conversions</build_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>rospy</run_depend>
   <run_depend>std_msgs</run_depend>
@@ -57,9 +58,10 @@
   <run_depend>bbros_bridge</run_depend>
   <run_depend>hri_msgs</run_depend>
   <run_depend>planning_msgs</run_depend>
-  <run_depend>language_understanding</run_depend>
   <run_depend>tf</run_depend>
+  <run_depend>tf_conversions</run_depend>
   <run_depend>Boost</run_depend>
+  <run_depend>pcl_conversions</run_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->

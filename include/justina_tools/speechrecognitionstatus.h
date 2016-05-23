@@ -55,6 +55,9 @@ class SpeechRecognitionStatus
 
         bool m_listenActivated; /**< Indicates when to start to enqueue the 
                                   recognized sentences */
+        
+        bool m_sentenceRecognized; /** Indicates if the speech recognition
+                                     module detected a sentence. */
 
         std::string m_recoSentencesTopic; /**< Stores the name of the 
                                             topic where the recognized
@@ -95,7 +98,7 @@ class SpeechRecognitionStatus
          * recognized speech value.
          */
         SpeechRecognitionStatus(ros::NodeHandle *nh = 0, std::string 
-                recoSentencesTopic= "recognizedSpeech");
+                recoSentencesTopic= "/recognizedSpeech");
 
         /**
          * @brief Initialize the communication of the object with ROS.
@@ -125,5 +128,19 @@ class SpeechRecognitionStatus
          * deactivated.
          */
         void clearListenedSentencesQueue();
+
+        /**
+         * @brief Indicates if the speech recognition node recognized a 
+         * sentence.
+         *
+         * @return True if a sentence was recognized. False otherwise.
+         */
+        bool isSentenceRecognized();
+
+        /**
+         * @brief Returns the last recognized sentence with the highest 
+         * hypothesis.
+         */
+        std::string getLastRecognizedSentence();
 };
 #endif

@@ -19,7 +19,7 @@
 #include "justina_tools/sensorsTasks.h"
 #include "nav_msgs/Path.h"
 #include "nav_msgs/GetMap.h"
-#include "navig_msgs/PathFromAll.h"
+#include "navig_msgs/PlanPath.h"
 #include "navig_msgs/PathFromMap.h"
 #include "sensor_msgs/PointCloud2.h"
 #include "ros/ros.h"
@@ -53,20 +53,10 @@ class NavigationTasks
                                                          the wave fornt 
                                                          algorithm. */
 
-        std::string m_calcAStarPathFromAllSrvName; /**< Stores the name of the
-                                                     service used to calculate 
-                                                     a path from the robot to 
-                                                     goal using the gid map
-                                                     and sensors and the A* 
-                                                     algorithm.*/
-
-        std::string m_calcWaveFrontPathFromAllSrvName; /**< Stores the name of 
-                                                         the service used to 
-                                                         calculate a path from 
-                                                         the robot to goal 
-                                                         using the grid map and 
-                                                         sensors with the wave 
-                                                         front algorithm. */
+        std::string m_planPathSrvName; /**< Stores the name of the
+                                         service used to calculate 
+                                         a path from the robot to 
+                                         goal. */
 
         std::string m_getOccupancyGridSrvName; /**< Stores the name of the 
                                                  service used to get the 
@@ -88,17 +78,10 @@ class NavigationTasks
                                                             grid wave front 
                                                             path service. */
 
-        ros::ServiceClient m_calcAStarPathFromAllSrv; /**< Service cliento ros 
-                                                        object to call to the 
-                                                        calculate grid-sensors 
-                                                        A* path service. */
-
-        ros::ServiceClient m_calcWaveFrontPathFromAllSrv; /**< Service client 
-                                                            ros objects to call
-                                                            to the calculate 
-                                                            gid-sensors wave
-                                                            front path service.
-                                                            */
+        ros::ServiceClient m_planPathSrv; /**< Service client ros 
+                                            object to call to the 
+                                            calculate grid-sensors 
+                                            A* path service. */
 
         /**
          * @brief Method to subscribe to the topics.
@@ -121,10 +104,8 @@ class NavigationTasks
                 "/navigation/path_planning/path_calculator/a_star_from_map",
                 std::string t_calcWaveFrontPathFromMapSrvName = 
                 "/navigation/path_planning/path_calculator/wave_front_from_map",
-                std::string t_calcAStarPathFromAllSrvName = 
-                "/navigation/path_planning/path_calculator/a_star_from_all",
-                std::string t_calcWaveFrontPathFromAllSrvName = 
-                "/navigation/path_planning/path_calculator/wave_front_from_all"
+                std::string t_planPathSrvName = 
+                "/navigation/mvn_pln/plan_path"
                 );
 
         /**
@@ -257,21 +238,6 @@ class NavigationTasks
 
         /**
          * @brief Calculates a path from a designated start position to a
-         * designated goal position using the A* algorithm and the grid-sensors
-         * map.
-         *
-         * @param t_startX The start x position.
-         * @param t_startY The start y position.
-         * @param t_goalX The goal x position.
-         * @param t_goalY The goal y position.
-         * @param t_path[out] The calculated path.
-         * @return True if the path was calculated succesfully. False otherwise.
-         */
-        bool calcAStarPathFromAll(float t_startX, float t_startY, 
-                float t_goalX, float t_goalY, nav_msgs::Path &t_path);
-
-        /**
-         * @brief Calculates a path from a designated start position to a
          * designated goal position using the wave front algorithm and the 
          * grid map.
          *
@@ -283,21 +249,6 @@ class NavigationTasks
          * @return True if the path was calculated succesfully. False otherwise.
          */
         bool calcWaveFrontPathFromMap(float t_startX, float t_startY, 
-                float t_goalX, float t_goalY, nav_msgs::Path &t_path);
-
-        /**
-         * @brief Calculates a path from a designated start position to a
-         * designated goal position using the wave front algorithm and the 
-         * grid-sensors map.
-         *
-         * @param t_startX The start x position.
-         * @param t_startY The start y position.
-         * @param t_goalX The goal x position.
-         * @param t_goalY The goal y position.
-         * @param t_path[out] The calculated path.
-         * @return True if the path was calculated succesfully. False otherwise.
-         */
-        bool calcWaveFrontPathFromAll(float t_startX, float t_startY, 
                 float t_goalX, float t_goalY, nav_msgs::Path &t_path);
 
         /**
@@ -314,19 +265,6 @@ class NavigationTasks
 
         /**
          * @brief Calculates a path from the robot current position to a
-         * designated goal position using the A* algorithm and the grid-sensors
-         * map.
-         *
-         * @param t_goalX The goal x position.
-         * @param t_goalY The goal y position.
-         * @param t_path[out] The calculated path.
-         * @return True if the path was calculated succesfully. False otherwise.
-         */
-        bool calcAStarPathFromAll(float t_goalX, float t_goalY, 
-                nav_msgs::Path &t_path);
-
-        /**
-         * @brief Calculates a path from the robot current position to a
          * designated goal position using the wave front algorithm and the 
          * grid map.
          *
@@ -338,17 +276,15 @@ class NavigationTasks
         bool calcWaveFrontPathFromMap(float t_goalX, float t_goalY, 
                 nav_msgs::Path &t_path);
 
-        /**
-         * @brief Calculates a path from the robot current psition to a
-         * designated goal position using the wave front algorithm and the 
-         * grid-sensors map.
-         *
-         * @param t_goalX The goal x position.
-         * @param t_goalY The goal y position.
-         * @param t_path[out] The calculated path.
-         * @return True if the path was calculated succesfully. False otherwise.
-         */
-        bool calcWaveFrontPathFromAll(float t_goalX, float t_goalY,
+        bool planPath(float t_startX, float t_startY, float t_goalX, 
+                float t_goalY, nav_msgs::Path &t_path);
+        bool planPath(float t_goalX, float t_goalY, nav_msgs::Path &t_path);
+        bool planPath(std::string t_startLocation, std::string t_goalLocation, 
                 nav_msgs::Path &t_path);
+        bool planPath(std::string t_goalLocation, nav_msgs::Path &t_path);
+        bool planPath(std::string t_startLocation, float t_goalX, 
+                float t_goalY, nav_msgs::Path &t_path);
+        bool planPath(float t_startX, float t_startY, 
+                std::string t_goalLocation, nav_msgs::Path &t_path);
 };
 #endif
