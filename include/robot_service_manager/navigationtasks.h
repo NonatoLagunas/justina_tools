@@ -16,7 +16,7 @@
 #define _JUSTINA_NAVIGATIONTASKS_H_
 #include <string>
 #include "robot_service_manager/navigationstatus.h"
-#include "robot_service_manager/sensorsTasks.h"
+#include "robot_service_manager/sensorstasks.h"
 #include "nav_msgs/Path.h"
 #include "nav_msgs/GetMap.h"
 #include "navig_msgs/PlanPath.h"
