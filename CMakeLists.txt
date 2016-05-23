@@ -124,7 +124,7 @@ include_directories(
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
   INCLUDE_DIRS include
-  LIBRARIES justina_tools
+  LIBRARIES robot_service_manager
   CATKIN_DEPENDS roscpp rospy std_msgs message_generation pcl_conversions
   DEPENDS Boost PCL opencv
 )
@@ -137,8 +137,8 @@ catkin_package(
 ## Your package locations should be listed before other locations
 # include_directories(include)
 
-file(GLOB_RECURSE headers "include/justina_tools/*.h*")
-file(GLOB_RECURSE sources "include/justina_tools/*.c*" "src/*.c*")
+file(GLOB_RECURSE headers "include/robot_service_manager/*.h*")
+file(GLOB_RECURSE sources "include/robot_service_manager/*.c*" "src/*.c*")
 
 ## Declare a C++ library
  add_library(robot_service_manager
