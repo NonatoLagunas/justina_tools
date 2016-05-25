@@ -50,17 +50,6 @@ class LangUnderstandingTasks
                                                service which will perform
                                                the parse sentence task.*/
 
-    public:
-        /**
-         * @brief Class constructor
-         * 
-         * Creates a new LangUnderstandingTasks object.
-         *
-         * @param parseSentenceServName The name of the service which will 
-         * perform the synchronous text-to-speech task. Default "/spg_say"
-         */
-        LangUnderstandingTasks(std::string parseSentenceServName=
-                "/language_understanding/parse_sentence_cfr");
         /**
          * @brief Performs the parse sentence task.
          * 
@@ -74,6 +63,18 @@ class LangUnderstandingTasks
          */
         bool parseSentence(std::string sentenceToParse, 
                 CommandFrame &parseResult);
+
+    public:
+        /**
+         * @brief Class constructor
+         * 
+         * Creates a new LangUnderstandingTasks object.
+         *
+         * @param parseSentenceServName The name of the service which will 
+         * perform the synchronous text-to-speech task. Default "/spg_say"
+         */
+        LangUnderstandingTasks(std::string parseSentenceServName=
+                "/language_understanding/parse_sentence_cfr");
 
         /**
          * @brief Indicates if a given sentence corresponds to a positive 
@@ -130,5 +131,18 @@ class LangUnderstandingTasks
          */
         bool isStopFollowInstruction(std::string sentence, 
                 std::string &goalToUnfollow);
+
+        /**
+         * @brief Indicates if a given sentence corresponds to a valid voice
+         * command.
+         *
+         * @param[in] sentence The sentence to anlyse.
+         * @param[out] command The detected command as a result of the parsing.
+         * @param[out] params The corresponding params of the detected command.
+         * @return True if the given sentence is a valid voice command. False
+         * otherwise.
+         */
+        bool isValidCommand(std::string sentence, std::string &command,
+                std::map<std::string, std::string> &params);
 };
 #endif

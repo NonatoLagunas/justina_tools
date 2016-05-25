@@ -187,3 +187,22 @@ bool LangUnderstandingTasks::parseSentence(std::string sentenceToParse,
 
 	return false;
 }
+
+bool LangUnderstandingTasks::isValidCommand(std::string sentence, 
+        std::string &command,
+        std::map<std::string, std::string> &params)
+{
+    command = "";
+
+    //Verify if the sentence belongs to a valid voice command
+    CommandFrame parseResult;
+    if(!parseSentence(sentence, parseResult))
+    {
+        return false;
+    }
+
+    command = parseResult.command;
+    params = parseResult.params;
+    
+    return true;
+}
