@@ -172,11 +172,11 @@ bool LangUnderstandingTasks::parseSentence(std::string sentenceToParse,
          * Storing the parameters resulting from the parsing.
          */
         resultCommand = srv.response.cfr.command;
-        for(int i=0; i<srv.response.cfr.frame_id.size(); i++)
+        for(int i=0; i<srv.response.cfr.params.size(); i++)
         {
             resultParams.insert(std::pair<std::string, std::string> (
-                        srv.response.cfr.frame_id[i], 
-                        srv.response.cfr.frame_value[i]
+                        srv.response.cfr.params[i].frame_id, 
+                        srv.response.cfr.params[i].frame_value
                         ));
         }
         parseResult.command = resultCommand;
