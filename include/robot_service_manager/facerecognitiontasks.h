@@ -13,7 +13,7 @@ class FaceRecognitionTasks
 {
     private:
 
-        ros::NodeHandle *m_nh;
+        ros::NodeHandle *m_nh; /**< ros node handle onject */
 
     public:
         
