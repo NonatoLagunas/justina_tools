@@ -145,6 +145,24 @@ class LangUnderstandingTasks
                 std::string &goalToUnfollow);
 
         /**
+         * Indicates if a given sentence corresponds to a membership
+         * instruction. This method can parse sentence like:
+         * 'my name is john'
+         * 'my tie is black'
+         * 'her son is luis'
+         *
+         * @param[in] t_sentence The sentence to analyse.
+         * @param[out] t_theme The membership object. In the sentence 'my name
+         * is justina' the object corresponds to the word 'name'.
+         * @param[out] t_value The membership object value. In the sentence 'my
+         * name is justina' the object value corresponds to the word 'justina'.
+         * @return True if the sentence corresponds to a membership 
+         * instruction. False otherwise.
+         */
+        bool isMembershipSentence(std::string t_sentence, std::string &t_theme,
+                std::string &t_value);
+
+        /**
          * @brief Indicates if a given sentence corresponds to a valid voice
          * command.
          *

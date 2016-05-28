@@ -6,6 +6,25 @@ LangUnderstandingTasks::LangUnderstandingTasks (
 {
 }
 
+bool LangUnderstandingTasks::isMembershipSentence(std::string t_sentence,
+        std::string &t_theme, std::string &t_value)
+{
+    CommandFrame parseResult;
+    parseSentence(t_sentence, parseResult);
+
+    //Verify if the sentence belongs to a membership command 
+    if(parseResult.command.compare("MEMBERSHIP") != 0)
+    {
+        return false;
+    }
+
+    //Store the goal parameter of the start follow instruction
+    t_theme = parseResult.params["theme"];
+    t_value = parseResult.params["value"];
+
+    return true;
+}
+
 bool LangUnderstandingTasks::isStartGuideInstruction(std::string t_sentence, 
                 std::string &t_goalToGuide)
 {
