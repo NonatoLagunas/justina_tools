@@ -11,7 +11,7 @@ set(
 	"planning"
 	"navigation"
 	"manipulation"
-    "vision_msgs"
+    "vision"
 )
 
 foreach(DEP ${TASK_PLANER_DEP})

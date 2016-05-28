@@ -18,6 +18,7 @@ find_package(catkin REQUIRED COMPONENTS
   tf
   pcl_conversions
   tf_conversions
+  vision_msgs
 )
 find_package(Boost REQUIRED COMPONENTS
     thread

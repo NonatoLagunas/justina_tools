@@ -22,13 +22,13 @@ add_message_files(
   VisionFaceObject.msg
   VisionFaceObjects.msg
   VisionFaceTrainObject.msg
-  
 )
 
 add_service_files(
   FILES
   RecognizeObject.srv
   RecognizeObjects.srv
+  DetectObjects.srv
 )
 
 generate_messages(
