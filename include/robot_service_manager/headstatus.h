@@ -34,7 +34,11 @@ class HeadStatus
         ros::Publisher m_headPosePublisher; /**< ROS publisher for the head
                                               pose topic*/
 
-        std::string m_headPoseTopic; /**< Stores the name of the topic from 
+        std::string m_headCurrentPoseTopic; /**< Stores the name of the topic 
+                                              from where the head status will 
+                                              be obtained*/
+
+        std::string m_headGoalPoseTopic; /**< Stores the name of the topic from 
                                        where the head status will be obtained*/
 
         std::string m_headBatteryTopic; /**< Stores the name of the topic from 
@@ -80,14 +84,18 @@ class HeadStatus
          * Creates a new HeadStatus object.
          *
          * @param nh The ROS Node ÇHandler of the simple task planner node.
-         * @param headPoseTopic The name of the topic which will be updated
-         * when the robot's head pose information change.
+         * @param headCurrentPoseTopic The name of the topic which will be 
+         * updated when the robot's head pose information change.
+         * @param headGoalPoseTopic The name of the topic to update the robot's
+         * head pose (i.e. move the head).
          * @param headBatteryTopic The name of the topic which will be updated
          * when the robot's head battery information change.
          */
         HeadStatus(ros::NodeHandle *nh = 0, 
-                std::string headPoseTopic = 
+                std::string headCurrentPoseTopic = 
                 "/hardware/head/current_pose", 
+                std::string headGoalPoseTopic = 
+                "/hardware/head/goal_pose", 
                 std::string headBatteryTopic = 
                 "/hardware/robot_state/head_battery"
                 );

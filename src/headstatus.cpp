@@ -1,9 +1,10 @@
 #include "robot_service_manager/headstatus.h"
 
-HeadStatus::HeadStatus(ros::NodeHandle *nh, std::string headPoseTopic,
-        std::string headBatteryTopic):
+HeadStatus::HeadStatus(ros::NodeHandle *nh, std::string headCurrentPoseTopic,
+        std::string headGoalPoseTopic, std::string headBatteryTopic):
     m_nh(nh),
-    m_headPoseTopic(headPoseTopic),
+    m_headCurrentPoseTopic(headCurrentPoseTopic),
+    m_headGoalPoseTopic(headGoalPoseTopic),
     m_headBatteryTopic(headBatteryTopic)
 {
     /**
@@ -59,7 +60,7 @@ void HeadStatus::prepareRosConnection()
      */
     if(!m_subHeadCurrentPose)
     {
-        if((m_subHeadCurrentPose = m_nh->subscribe(m_headPoseTopic, 100,
+        if((m_subHeadCurrentPose = m_nh->subscribe(m_headCurrentPoseTopic, 100,
                         &HeadStatus::headPoseCallback, this)))
         {
             m_isInitialized = true; 
@@ -68,7 +69,7 @@ void HeadStatus::prepareRosConnection()
     if(!m_headPosePublisher) 
     {
         if((m_headPosePublisher = m_nh->advertise<std_msgs::Float32MultiArray>(
-                        m_headPoseTopic, 100)))
+                        m_headGoalPoseTopic, 100)))
         {
             m_isInitialized = true; 
         } else {}
@@ -125,7 +126,7 @@ void HeadStatus::setHeadPose(float headPan, float headTilt)
          * Try to connect.
          */
         m_headPosePublisher = m_nh->advertise<std_msgs::Float32MultiArray>(
-                        m_headPoseTopic, 100);
+                        m_headGoalPoseTopic, 100);
     }
     if(m_headPosePublisher)
     {
