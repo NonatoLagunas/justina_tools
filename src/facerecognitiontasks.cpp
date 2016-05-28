@@ -136,9 +136,20 @@ void FaceRecognitionTasks::recoFacesResultsCallback(
     m_lastDetectedFaces.clear();
     for(int i=0; i<t_recoFacesMsg->recog_faces.size(); i++)
     {
+        std::vector<geometry_msgs::Point> faceBoundingBox;
+
+        faceBoundingBox.push_back(
+                t_recoFacesMsg->recog_faces[i].bounding_box[0]
+                );
+        faceBoundingBox.push_back(
+                t_recoFacesMsg->recog_faces[i].bounding_box[1]
+                );
+
         FaceObject currentFace(
                 t_recoFacesMsg->recog_faces[i].id, 
                 t_recoFacesMsg->recog_faces[i].confidence,
+                t_recoFacesMsg->recog_faces[i].face_centroid,
+                faceBoundingBox,
                 t_recoFacesMsg->recog_faces[i].smile,
                 t_recoFacesMsg->recog_faces[i].gender);
         

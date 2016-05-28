@@ -19,6 +19,7 @@ find_package(catkin REQUIRED COMPONENTS
   pcl_conversions
   tf_conversions
   vision_msgs
+  geometry_msgs
   navig_msgs
 )
 find_package(Boost REQUIRED COMPONENTS
@@ -127,7 +128,7 @@ include_directories(
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES robot_service_manager
-  CATKIN_DEPENDS roscpp rospy std_msgs message_generation pcl_conversions
+  CATKIN_DEPENDS roscpp rospy std_msgs message_generation pcl_conversions geometry_msgs
   DEPENDS Boost PCL opencv
 )
 

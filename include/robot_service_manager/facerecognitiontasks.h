@@ -12,6 +12,7 @@
 #include "std_msgs/Int32.h"
 #include "std_msgs/Empty.h"
 #include "std_msgs/String.h"
+#include "geometry_msgs/Point.h"
 #include "vision_msgs/VisionFaceObjects.h"
 #include "vision_msgs/VisionFaceTrainObject.h"
 #include "ros/ros.h"
@@ -88,12 +89,17 @@ class FaceRecognitionTasks
         {
             std::string faceID; 
             float confidence;
+            geometry_msgs::Point faceCentroid;
+            std::vector<geometry_msgs::Point> boundingBox;
             bool smilingFace; 
             int faceGender;
 
             FaceObject(std::string t_faceID, float t_confidence, 
+                    geometry_msgs::Point t_faceCentroid,
+                    std::vector<geometry_msgs::Point> t_boundingBox,
                     bool t_smilingFace, int t_faceGender) : 
                 faceID(t_faceID), confidence(t_confidence), 
+                boundingBox(t_boundingBox), faceCentroid(t_faceCentroid),
                 smilingFace(t_smilingFace), faceGender(t_faceGender) {}
         };
         /**
