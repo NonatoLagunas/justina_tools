@@ -204,7 +204,7 @@ bool FaceRecognitionTasks::trainFace(std::string t_faceID, int t_timeout,
         {
             startFaceTraining(t_faceID, t_frames);
         }
-        else
+        if(faceTrainingFinished() && m_framesTrained > (int)(t_frames/2))
         {
             faceTrained = true;
         }
