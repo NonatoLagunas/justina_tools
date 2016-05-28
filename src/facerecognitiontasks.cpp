@@ -194,13 +194,19 @@ bool FaceRecognitionTasks::trainFace(std::string t_faceID, int t_timeout,
 
     startFaceTraining(t_faceID, t_frames);
 
+    //loop until reach timeout or until found and train a face
+    bool faceTrained = false;
     chrono::milliseconds elapsedTime;
     chrono::steady_clock::time_point startTime = chrono::steady_clock::now();
-    while(ros::ok() && elapsedTime.count()<t_timeout)
+    while(ros::ok() && elapsedTime.count()<t_timeout && !faceTrained)
     {
         if(faceTrainingFinished() && m_framesTrained <= (int)(t_frames/2))
         {
             startFaceTraining(t_faceID, t_frames);
+        }
+        else
+        {
+            faceTrained = true;
         }
         elapsedTime = chrono::duration_cast<chrono::milliseconds>(
                 chrono::steady_clock::now() - startTime
@@ -213,7 +219,7 @@ bool FaceRecognitionTasks::trainFace(std::string t_faceID, int t_timeout,
         return false;
     }
     
-    return true;
+    return faceTrained;
 }
 
 void FaceRecognitionTasks::startFaceRecognition()
