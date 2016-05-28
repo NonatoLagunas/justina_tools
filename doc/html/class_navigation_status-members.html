@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Justina Tools: Member List</title>
+<title>Robot Service Manager: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,9 +23,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Justina Tools
+   <div id="projectname">Robot Service Manager
    </div>
-   <div id="projectbrief">Justina Tools ROS node for the Justina robot</div>
+   <div id="projectbrief">Robot Service Manager ROS node for the Justina robot</div>
   </td>
  </tr>
  </tbody>
@@ -89,17 +89,18 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <p>This is the complete list of members for <a class="el" href="class_navigation_status.html">NavigationStatus</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="class_navigation_status.html#a06944f3c173eb731a5545c1b3cc34fd1">getRobotCurrentPose</a>(float &amp;t_currentX, float &amp;t_currentY, float &amp;t_currentTheta)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_navigation_status.html#a0215f41ee324eba29ff3813a7a5f0598">getCurrentPose</a>(float &amp;t_x, float &amp;t_y, float &amp;t_angle)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
   <tr><td class="entry"><a class="el" href="class_navigation_status.html#aef2ebb49eddf679a58368f3aeda55031">initRosConnection</a>(ros::NodeHandle *t_nh=0)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_navigation_status.html#aeb7c5af6d198e22e7c9f8504e821cf8d">NavigationStatus</a>(ros::NodeHandle *t_nh=0, std::string t_goalReachedTopicName=&quot;/navigation/goal_reached&quot;, std::string t_moveGoalDistTopicName=&quot;/navigation/path_planning/simple_move/goal_dist&quot;, std::string t_moveGoalDistAngleTopicName=&quot;/navigation/path_planning/simple_move/goal_dist_angle&quot;, std::string t_moveGoalPathTopicName=&quot;/navigation/path_planning/simple_move/goal_path&quot;, std::string t_moveGoalPoseTopicName=&quot;/navigation/path_planning/simple_move/goal_pose&quot;, std::string t_moveGoalRelPoseTopicName=&quot;/navigation/path_planning/simple_move/goal_rel_pose&quot;, std::string t_getCloseLocTopicName=&quot;/navigation/mvn_pln/get_close_loc&quot;, std::string t_getCloseXYATopicName=&quot;/navigation/mvn_pln/get_close_xya&quot;, std::string t_currentRobotPoseTopicName=&quot;/navigation/localization/current_pose&quot;)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_navigation_status.html#ab9b2215d5144a13e2e033b17d9654a8f">setGetCloseGoal</a>(float t_x, float t_y)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_navigation_status.html#a1a6a558780b9be3debd082aaa5c3abf6">setGetCloseGoal</a>(float t_x, float t_y, float angle)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_navigation_status.html#a6ab45826292bef7eb478f1acdec98cdb">setGetCloseGoal</a>(std::string t_goalName)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_navigation_status.html#af34622f0a0a443d33bde23a16eed9c43">setGoalDist</a>(float t_distance)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_navigation_status.html#a163456f54bdfbd65b6d0b3ac55c2b744">setGoalDistAngle</a>(float t_distance, float t_angle)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_navigation_status.html#ad90b63b2a912ffc92860972bf0984cbd">setGoalPath</a>(nav_msgs::Path &amp;t_path)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="class_navigation_status.html#a64808d980a79e4426e3fe0ea1d78edb2">setGoalPose</a>(float t_x, float t_y, float t_angle)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="class_navigation_status.html#a15f90efbbfbeba3301f20e42ef1d66b6">setGoalRelPose</a>(float t_relX, float t_relY, float t_relAngle)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_navigation_status.html#a7ff7a9be75051aa00d51d1304579e9fe">isGoalReached</a>()</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_navigation_status.html#aeb7c5af6d198e22e7c9f8504e821cf8d">NavigationStatus</a>(ros::NodeHandle *t_nh=0, std::string t_goalReachedTopicName=&quot;/navigation/goal_reached&quot;, std::string t_moveGoalDistTopicName=&quot;/navigation/path_planning/simple_move/goal_dist&quot;, std::string t_moveGoalDistAngleTopicName=&quot;/navigation/path_planning/simple_move/goal_dist_angle&quot;, std::string t_moveGoalPathTopicName=&quot;/navigation/path_planning/simple_move/goal_path&quot;, std::string t_moveGoalPoseTopicName=&quot;/navigation/path_planning/simple_move/goal_pose&quot;, std::string t_moveGoalRelPoseTopicName=&quot;/navigation/path_planning/simple_move/goal_rel_pose&quot;, std::string t_getCloseLocTopicName=&quot;/navigation/mvn_pln/get_close_loc&quot;, std::string t_getCloseXYATopicName=&quot;/navigation/mvn_pln/get_close_xya&quot;, std::string t_currentRobotPoseTopicName=&quot;/navigation/localization/current_pose&quot;)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_navigation_status.html#ab9b2215d5144a13e2e033b17d9654a8f">setGetCloseGoal</a>(float t_x, float t_y)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_navigation_status.html#ac77fe3884fbe9d9c5788aa0997c68806">setGetCloseGoal</a>(float t_x, float t_y, float t_angle)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_navigation_status.html#a6ab45826292bef7eb478f1acdec98cdb">setGetCloseGoal</a>(std::string t_goalName)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_navigation_status.html#af34622f0a0a443d33bde23a16eed9c43">setGoalDist</a>(float t_distance)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_navigation_status.html#a163456f54bdfbd65b6d0b3ac55c2b744">setGoalDistAngle</a>(float t_distance, float t_angle)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_navigation_status.html#ad90b63b2a912ffc92860972bf0984cbd">setGoalPath</a>(nav_msgs::Path &amp;t_path)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="class_navigation_status.html#a64808d980a79e4426e3fe0ea1d78edb2">setGoalPose</a>(float t_x, float t_y, float t_angle)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
+  <tr><td class="entry"><a class="el" href="class_navigation_status.html#a15f90efbbfbeba3301f20e42ef1d66b6">setGoalRelPose</a>(float t_relX, float t_relY, float t_relAngle)</td><td class="entry"><a class="el" href="class_navigation_status.html">NavigationStatus</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

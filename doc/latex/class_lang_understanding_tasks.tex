@@ -14,8 +14,6 @@ Perform language uderstanding tasks.
 \item 
 \hyperlink{class_lang_understanding_tasks_a86d3be8bceae7397f42d98d790d5f3ef}{Lang\+Understanding\+Tasks} (std\+::string parse\+Sentence\+Serv\+Name=\char`\"{}/language\+\_\+understanding/parse\+\_\+sentence\+\_\+cfr\char`\"{})
 \begin{DoxyCompactList}\small\item\em Class constructor. \end{DoxyCompactList}\item 
-bool \hyperlink{class_lang_understanding_tasks_af23861c3c01ff437eb2cd43be6365e90}{parse\+Sentence} (std\+::string sentence\+To\+Parse, Command\+Frame \&parse\+Result)
-\begin{DoxyCompactList}\small\item\em Performs the parse sentence task. \end{DoxyCompactList}\item 
 bool \hyperlink{class_lang_understanding_tasks_a03615696fc2e78b620edc48fea4b3362}{is\+Positive\+User\+Confirmation} (std\+::string sentence)
 \begin{DoxyCompactList}\small\item\em Indicates if a given sentence corresponds to a positive confirmation (eg. robot yes). \end{DoxyCompactList}\item 
 bool \hyperlink{class_lang_understanding_tasks_a9b99f278d0d726f25756267518713b6f}{is\+Negative\+User\+Confirmation} (std\+::string sentence)
@@ -25,7 +23,9 @@ bool \hyperlink{class_lang_understanding_tasks_a54c9a8ad3bd20938bce720b86711198f
 bool \hyperlink{class_lang_understanding_tasks_a095f138989fbc7d139272a82490c3361}{is\+Start\+Follow\+Instruction} (std\+::string sentence, std\+::string \&goal\+To\+Follow)
 \begin{DoxyCompactList}\small\item\em Indicates if a given sentence corresponds to a start switch command of the follow goal instruction. \end{DoxyCompactList}\item 
 bool \hyperlink{class_lang_understanding_tasks_acab2b17e01d5eb7b89440659abeb62ad}{is\+Stop\+Follow\+Instruction} (std\+::string sentence, std\+::string \&goal\+To\+Unfollow)
-\begin{DoxyCompactList}\small\item\em Indicates if a given sentence corresponds to a stop switch command of the follow goal instruction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Indicates if a given sentence corresponds to a stop switch command of the follow goal instruction. \end{DoxyCompactList}\item 
+bool \hyperlink{class_lang_understanding_tasks_aaa6e78154e3bd9a9ac9bd9f243cea8ce}{is\+Valid\+Command} (std\+::string sentence, std\+::string \&command, std\+::map$<$ std\+::string, std\+::string $>$ \&params)
+\begin{DoxyCompactList}\small\item\em Indicates if a given sentence corresponds to a valid voice command. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -173,43 +173,34 @@ True if the sentence corresponds to a stop switch command of the follow goal ins
 \end{DoxyReturn}
 Verify if the sentence belongs to a switch command and if the asociated action and value is follow and start respectively.
 
-Store the goal parameter of the start follow instruction\index{Lang\+Understanding\+Tasks@{Lang\+Understanding\+Tasks}!parse\+Sentence@{parse\+Sentence}}
-\index{parse\+Sentence@{parse\+Sentence}!Lang\+Understanding\+Tasks@{Lang\+Understanding\+Tasks}}
-\subsubsection[{\texorpdfstring{parse\+Sentence(std\+::string sentence\+To\+Parse, Command\+Frame \&parse\+Result)}{parseSentence(std::string sentenceToParse, CommandFrame &parseResult)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Lang\+Understanding\+Tasks\+::parse\+Sentence (
+Store the goal parameter of the start follow instruction\index{Lang\+Understanding\+Tasks@{Lang\+Understanding\+Tasks}!is\+Valid\+Command@{is\+Valid\+Command}}
+\index{is\+Valid\+Command@{is\+Valid\+Command}!Lang\+Understanding\+Tasks@{Lang\+Understanding\+Tasks}}
+\subsubsection[{\texorpdfstring{is\+Valid\+Command(std\+::string sentence, std\+::string \&command, std\+::map$<$ std\+::string, std\+::string $>$ \&params)}{isValidCommand(std::string sentence, std::string &command, std::map< std::string, std::string > &params)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Lang\+Understanding\+Tasks\+::is\+Valid\+Command (
 \begin{DoxyParamCaption}
-\item[{std\+::string}]{sentence\+To\+Parse, }
-\item[{Command\+Frame \&}]{parse\+Result}
+\item[{std\+::string}]{sentence, }
+\item[{std\+::string \&}]{command, }
+\item[{std\+::map$<$ std\+::string, std\+::string $>$ \&}]{params}
 \end{DoxyParamCaption}
-)}\hypertarget{class_lang_understanding_tasks_af23861c3c01ff437eb2cd43be6365e90}{}\label{class_lang_understanding_tasks_af23861c3c01ff437eb2cd43be6365e90}
+)}\hypertarget{class_lang_understanding_tasks_aaa6e78154e3bd9a9ac9bd9f243cea8ce}{}\label{class_lang_understanding_tasks_aaa6e78154e3bd9a9ac9bd9f243cea8ce}
 
 
-Performs the parse sentence task. 
-
-Makes a call to a R\+OS service, advertised by the language understanding node, to perform a sentence parsing task.
+Indicates if a given sentence corresponds to a valid voice command. 
 
 
-\begin{DoxyParams}{Parameters}
-{\em sentence\+To\+Parse} & The sentence to parse \\
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em sentence} & The sentence to anlyse. \\
 \hline
-{\em parse\+Result} & Stores the result command and parameters of the parse sentence task. \\
+\mbox{\tt out}  & {\em command} & The detected command as a result of the parsing. \\
+\hline
+\mbox{\tt out}  & {\em params} & The corresponding params of the detected command. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
-true if the task was performed succesfully, false otherwise 
+True if the given sentence is a valid voice command. False otherwise. 
 \end{DoxyReturn}
-Create a client object to call the R\+OS service
 
-Create a srv object to send the request to the R\+OS service
-
-Call the R\+OS service
-
-Verify if the sentence was succesfully parsed
-
-To store the command an parameters resulting from the parsing.
-
-Storing the parameters resulting from the parsing.
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-include/justina\+\_\+tools/langunderstandingtasks.\+h\item 
+include/robot\+\_\+service\+\_\+manager/langunderstandingtasks.\+h\item 
 src/langunderstandingtasks.\+cpp\end{DoxyCompactItemize}

@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.11"/>
-<title>Justina Tools: Class Members</title>
+<title>Robot Service Manager: Class Members</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -23,9 +23,9 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">Justina Tools
+   <div id="projectname">Robot Service Manager
    </div>
-   <div id="projectbrief">Justina Tools ROS node for the Justina robot</div>
+   <div id="projectbrief">Robot Service Manager ROS node for the Justina robot</div>
   </td>
  </tr>
  </tbody>
@@ -77,6 +77,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="#index_a"><span>a</span></a></li>
       <li><a href="#index_c"><span>c</span></a></li>
       <li><a href="#index_d"><span>d</span></a></li>
+      <li><a href="#index_f"><span>f</span></a></li>
       <li><a href="#index_g"><span>g</span></a></li>
       <li><a href="#index_h"><span>h</span></a></li>
       <li><a href="#index_i"><span>i</span></a></li>
@@ -117,8 +118,20 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_c"></a>- c -</h3><ul>
+<li>calcAStarPathFromMap()
+: <a class="el" href="class_navigation_tasks.html#ac71b80ab71c7aecfbadec887ba7ef4f4">NavigationTasks</a>
+</li>
+<li>calcWaveFrontPathFromMap()
+: <a class="el" href="class_navigation_tasks.html#a547509a34a1f3af7c39eec7987c9038d">NavigationTasks</a>
+</li>
+<li>clearFacesDataBase()
+: <a class="el" href="class_face_recognition_tasks.html#abd3d414ffa7862d467527644e547e75f">FaceRecognitionTasks</a>
+</li>
 <li>clearListenedSentencesQueue()
 : <a class="el" href="class_speech_recognition_status.html#a6cb03e02b0b474d9361a4b546c2c103a">SpeechRecognitionStatus</a>
+</li>
+<li>clearSpecificFace()
+: <a class="el" href="class_face_recognition_tasks.html#ad5ba2fdb1fbd1dff9d6ee3027d7fcfc2">FaceRecognitionTasks</a>
 </li>
 </ul>
 
@@ -126,6 +139,19 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <h3><a class="anchor" id="index_d"></a>- d -</h3><ul>
 <li>directKinematics()
 : <a class="el" href="class_transformations.html#a1d1962699b67b369ea252172ade6fffe">Transformations</a>
+</li>
+</ul>
+
+
+<h3><a class="anchor" id="index_f"></a>- f -</h3><ul>
+<li>faceRecognitionFinished()
+: <a class="el" href="class_face_recognition_tasks.html#ad33d493055a9ffca2878d81830cfe84a">FaceRecognitionTasks</a>
+</li>
+<li>FaceRecognitionTasks()
+: <a class="el" href="class_face_recognition_tasks.html#af1a16e79e520294fdb8d42f9c8fd5a37">FaceRecognitionTasks</a>
+</li>
+<li>faceTrainingFinished()
+: <a class="el" href="class_face_recognition_tasks.html#aea15e4e1881ec649181c4024ada2e7b9">FaceRecognitionTasks</a>
 </li>
 </ul>
 
@@ -143,6 +169,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>getArmCurrentPose()
 : <a class="el" href="class_robot_arm_status.html#ad88835812a9c12a335ce6f9808b4370a">RobotArmStatus</a>
 </li>
+<li>getCurrentPose()
+: <a class="el" href="class_navigation_status.html#a0215f41ee324eba29ff3813a7a5f0598">NavigationStatus</a>
+</li>
 <li>getHeadBattery()
 : <a class="el" href="class_head_status.html#a2f4da46d8db94b6bcc1bfc2b7e38e800">HeadStatus</a>
 </li>
@@ -158,11 +187,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>getKinnectRGBD()
 : <a class="el" href="class_sensors_tasks.html#a8e366e9cb170c730304ea706a18370ce">SensorsTasks</a>
 </li>
+<li>getLastRecognizedSentence()
+: <a class="el" href="class_speech_recognition_status.html#a2d8314b8cc6725021c956c2c619b8b98">SpeechRecognitionStatus</a>
+</li>
+<li>getListenedSentences()
+: <a class="el" href="class_speech_recognition_status.html#a7650559297b97708d9cecfa9b68bd89d">SpeechRecognitionStatus</a>
+</li>
 <li>getMobileBaseBattery()
 : <a class="el" href="class_mobile_base_status.html#afb2ffc819c33b4f5fc28e4808322297e">MobileBaseStatus</a>
 </li>
-<li>getRobotCurrentPose()
-: <a class="el" href="class_navigation_status.html#a06944f3c173eb731a5545c1b3cc34fd1">NavigationStatus</a>
+<li>getOccupancyGrid()
+: <a class="el" href="class_navigation_tasks.html#a53046e74add19cc04fcfad6cbac34775">NavigationTasks</a>
 </li>
 <li>getRobotRGBD()
 : <a class="el" href="class_sensors_tasks.html#a55edd615fa344fd80ab03bb2bdfff1be">SensorsTasks</a>
@@ -179,9 +214,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <h3><a class="anchor" id="index_i"></a>- i -</h3><ul>
 <li>initRosConnection()
-: <a class="el" href="class_head_status.html#af482b42420d6347e5bff1ae667cea754">HeadStatus</a>
+: <a class="el" href="class_face_recognition_tasks.html#ab8c3737919b138bd11bff876d666a1df">FaceRecognitionTasks</a>
+, <a class="el" href="class_head_status.html#af482b42420d6347e5bff1ae667cea754">HeadStatus</a>
 , <a class="el" href="class_mobile_base_status.html#afae5edeb924e04bc50ecbc04b38f13c6">MobileBaseStatus</a>
 , <a class="el" href="class_navigation_status.html#aef2ebb49eddf679a58368f3aeda55031">NavigationStatus</a>
+, <a class="el" href="class_navigation_tasks.html#ab1bef734b1b580c7dbfb8970a4d056d2">NavigationTasks</a>
 , <a class="el" href="class_robot_arm_status.html#aa51004d359020b3280d1c4d498f50b6f">RobotArmStatus</a>
 , <a class="el" href="class_robot_status.html#aeb99cb47b714b8a03d432c1ec13b4089">RobotStatus</a>
 , <a class="el" href="class_sensors_tasks.html#abc7b8d74392717156e78621e8741b231">SensorsTasks</a>
@@ -194,17 +231,26 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>isFollowGoalInstruction()
 : <a class="el" href="class_lang_understanding_tasks.html#a54c9a8ad3bd20938bce720b86711198f">LangUnderstandingTasks</a>
 </li>
+<li>isGoalReached()
+: <a class="el" href="class_navigation_status.html#a7ff7a9be75051aa00d51d1304579e9fe">NavigationStatus</a>
+</li>
 <li>isNegativeUserConfirmation()
 : <a class="el" href="class_lang_understanding_tasks.html#a9b99f278d0d726f25756267518713b6f">LangUnderstandingTasks</a>
 </li>
 <li>isPositiveUserConfirmation()
 : <a class="el" href="class_lang_understanding_tasks.html#a03615696fc2e78b620edc48fea4b3362">LangUnderstandingTasks</a>
 </li>
+<li>isSentenceRecognized()
+: <a class="el" href="class_speech_recognition_status.html#a03c24687f9e2e3de3288634b178829ac">SpeechRecognitionStatus</a>
+</li>
 <li>isStartFollowInstruction()
 : <a class="el" href="class_lang_understanding_tasks.html#a095f138989fbc7d139272a82490c3361">LangUnderstandingTasks</a>
 </li>
 <li>isStopFollowInstruction()
 : <a class="el" href="class_lang_understanding_tasks.html#acab2b17e01d5eb7b89440659abeb62ad">LangUnderstandingTasks</a>
+</li>
+<li>isValidCommand()
+: <a class="el" href="class_lang_understanding_tasks.html#aaa6e78154e3bd9a9ac9bd9f243cea8ce">LangUnderstandingTasks</a>
 </li>
 </ul>
 
@@ -227,17 +273,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>NavigationStatus()
 : <a class="el" href="class_navigation_status.html#aeb7c5af6d198e22e7c9f8504e821cf8d">NavigationStatus</a>
 </li>
+<li>NavigationTasks()
+: <a class="el" href="class_navigation_tasks.html#addd75ee6e6e38faa8d3fe41c91ae65fc">NavigationTasks</a>
+</li>
 </ul>
 
 
 <h3><a class="anchor" id="index_p"></a>- p -</h3><ul>
-<li>parseSentence()
-: <a class="el" href="class_lang_understanding_tasks.html#af23861c3c01ff437eb2cd43be6365e90">LangUnderstandingTasks</a>
+<li>planPath()
+: <a class="el" href="class_navigation_tasks.html#a77b9255d48f9339897a2f15c4096d1cd">NavigationTasks</a>
 </li>
 </ul>
 
 
 <h3><a class="anchor" id="index_r"></a>- r -</h3><ul>
+<li>recognizeFaces()
+: <a class="el" href="class_face_recognition_tasks.html#a6f7c7e3ee0582afc908511bb12644cd2">FaceRecognitionTasks</a>
+</li>
 <li>RobotArmStatus()
 : <a class="el" href="class_robot_arm_status.html#a0d010c81263f836dee5698c1d4e8728d">RobotArmStatus</a>
 </li>
@@ -248,9 +300,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_s"></a>- s -</h3><ul>
-<li>say()
-: <a class="el" href="class_justina_h_r_i.html#af8e36ff5c4c0e7a18db3c75826d1741c">JustinaHRI</a>
-</li>
 <li>sendStopHardwareIndication()
 : <a class="el" href="class_robot_status.html#ac253da405e6303949c3d48e773ce29e9">RobotStatus</a>
 </li>
@@ -291,9 +340,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>setMobileBaseSpeeds()
 : <a class="el" href="class_mobile_base_status.html#a051ef3d8ae09020198d6dd1c3bdb4bed">MobileBaseStatus</a>
 </li>
-<li>setNodeHandle()
-: <a class="el" href="class_justina_h_r_i.html#a5fa534777896e61633e48eb29504d378">JustinaHRI</a>
-</li>
 <li>setTorqueGrip()
 : <a class="el" href="class_robot_arm_status.html#a4b90502f4a99fd4d94f66a695e7fe464">RobotArmStatus</a>
 </li>
@@ -302,10 +348,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 , <a class="el" href="class_speech_generator_tasks.html#ac9db87c14680846c13176e95be96ad12">SpeechGeneratorTasks</a>
 </li>
 <li>SpeechRecognitionStatus()
-: <a class="el" href="class_speech_recognition_status.html#ad7969753c6f4a13db64ffe203b7aa46b">SpeechRecognitionStatus</a>
+: <a class="el" href="class_speech_recognition_status.html#a8a076498b738c172b314eec5797502b8">SpeechRecognitionStatus</a>
 </li>
-<li>startFollowHuman()
-: <a class="el" href="class_justina_h_r_i.html#ae7683e170752c6771f1a9dbad50eb73d">JustinaHRI</a>
+<li>startFaceRecognition()
+: <a class="el" href="class_face_recognition_tasks.html#aa7095ceda4a0a124349a7dc0d8daf48d">FaceRecognitionTasks</a>
+</li>
+<li>startFaceTraining()
+: <a class="el" href="class_face_recognition_tasks.html#a72c4e648abec1894008a5395c23afa29">FaceRecognitionTasks</a>
 </li>
 <li>startListening()
 : <a class="el" href="class_speech_recognition_status.html#a87b7f32cce3498ccaf34792d4557f23f">SpeechRecognitionStatus</a>
@@ -313,17 +362,23 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>startSavingCloud()
 : <a class="el" href="class_sensors_tasks.html#a659aa197ecaa974a071ee42f33d224fa">SensorsTasks</a>
 </li>
-<li>startSay()
-: <a class="el" href="class_justina_h_r_i.html#a4cbe68af9d79bb9e025be2adaf2bd89d">JustinaHRI</a>
-</li>
-<li>stopFollowHuman()
-: <a class="el" href="class_justina_h_r_i.html#ab8f40b9964709dd4d3f7c841ba30bf09">JustinaHRI</a>
-</li>
 <li>stopListening()
 : <a class="el" href="class_speech_recognition_status.html#acdd801807e5fac5a6e68b1aed8c7ca22">SpeechRecognitionStatus</a>
 </li>
 <li>stopSavingCloud()
 : <a class="el" href="class_sensors_tasks.html#a18dfe16fa45180c91e16e5cf7b7bb174">SensorsTasks</a>
+</li>
+<li>syncGetClose()
+: <a class="el" href="class_navigation_tasks.html#a6c253bfcb8db39242955c6d9ef614651">NavigationTasks</a>
+</li>
+<li>syncGoToPose()
+: <a class="el" href="class_navigation_tasks.html#abb964f84a946da89bfc2d91da3e0dc44">NavigationTasks</a>
+</li>
+<li>syncGoToRelPose()
+: <a class="el" href="class_navigation_tasks.html#a881fcc0eaf1f12cb9920a76c22bb342f">NavigationTasks</a>
+</li>
+<li>syncMove()
+: <a class="el" href="class_navigation_tasks.html#a8e479ecb29bf123422a97407158741e4">NavigationTasks</a>
 </li>
 <li>syncSpeech()
 : <a class="el" href="class_robot_arm_tasks.html#a0936c7110aa3590770ceef70ca630b84">RobotArmTasks</a>
@@ -333,6 +388,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_t"></a>- t -</h3><ul>
+<li>trainFace()
+: <a class="el" href="class_face_recognition_tasks.html#ac37de471cb7aa80b2a15a4a7d63d4221">FaceRecognitionTasks</a>
+</li>
 <li>Transformations()
 : <a class="el" href="class_transformations.html#a2fccde11f2e479e084d1126ff6a3449e">Transformations</a>
 </li>
@@ -340,8 +398,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <h3><a class="anchor" id="index_w"></a>- w -</h3><ul>
-<li>waitForSpokenSentence()
-: <a class="el" href="class_justina_h_r_i.html#a0eeb1f4e8fd2196f1781c55d57321c90">JustinaHRI</a>
+<li>waitForGoalReached()
+: <a class="el" href="class_navigation_tasks.html#a347aa2db0e601217f76722b93ca3032e">NavigationTasks</a>
 </li>
 </ul>
 </div><!-- contents -->
