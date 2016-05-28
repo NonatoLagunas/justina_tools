@@ -121,6 +121,18 @@ class LangUnderstandingTasks
                 std::string &goalToFollow);
 
         /**
+         * Indicates if a given sentence corresponds to a start switch 
+         * command of the guide goal instruction.
+         *
+         * @param[in] t_sentence The sentence to analyse.
+         * @param[out] t_goalToGuide The goal to follow.
+         * @return True if the sentence corresponds to a start switch command
+         * of the guide goal instruction, False otherwise.
+         */
+        bool isStartGuideInstruction(std::string t_sentence, 
+                std::string &t_goalToGuide);
+
+        /**
          * @brief Indicates if a given sentence corresponds to a stop switch 
          * command of the follow goal instruction.
          *

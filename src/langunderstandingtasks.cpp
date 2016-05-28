@@ -6,6 +6,36 @@ LangUnderstandingTasks::LangUnderstandingTasks (
 {
 }
 
+bool LangUnderstandingTasks::isStartGuideInstruction(std::string t_sentence, 
+                std::string &t_goalToGuide)
+{
+    CommandFrame parseResult;
+    parseSentence(t_sentence, parseResult);
+
+    /**
+     * Verify if the sentence belongs to a switch command and if the asociated
+     * action and value is guide and start respectively.
+     */
+    if(parseResult.command.compare("SWITCH") != 0)
+    {
+        return false;
+    }
+
+    if((parseResult.params["action"].compare("guide") != 0 && 
+                parseResult.params["action"].compare("guiding") != 0) ||
+            parseResult.params["value"].compare("start") != 0)
+    {
+        return false;
+    }
+    
+    /**
+     * Store the goal parameter of the start follow instruction
+     */
+    t_goalToGuide = parseResult.params["goal"];
+
+    return true;
+}
+
 bool LangUnderstandingTasks::isStartFollowInstruction(std::string sentence, 
                 std::string &goalToFollow)
 {
