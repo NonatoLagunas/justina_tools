@@ -176,6 +176,7 @@ void FaceRecognitionTasks::startFaceTraining(std::string t_faceID, int t_frames)
         trainFramesMsg.frames = t_frames;
 
         m_trainFacesPub.publish(trainFramesMsg);
+        ros::spinOnce();
     }
     else
     {
