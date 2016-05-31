@@ -5,6 +5,7 @@ RobotArmStatus::RobotArmStatus(ros::NodeHandle *nh, int armDOF,
         std::string armGoalGripperTopic, std::string armGoalPoseTopic, 
         std::string armGripperTorqueTopic, std::string armGoalTorqueTopic,
         std::string armCurrentBatteryTopic) : 
+    m_nh(nh),
     m_armDOF(armDOF),
     m_armCurrentPoseTopic(armCurrentPoseTopic),
     m_armCurrentGripperTopic(armCurrentGripperTopic),

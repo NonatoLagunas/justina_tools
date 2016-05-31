@@ -55,6 +55,7 @@ void NavigationStatus::initRosConnection(ros::NodeHandle *t_nh)
          * Initialize subscribers, publishers and verification.
          */
         prepareRosConnection();
+        m_tfListener = new tf::TransformListener();
         m_tfListener->waitForTransform("map", "base_link", ros::Time(0), 
                 ros::Duration(5.0));
     }
