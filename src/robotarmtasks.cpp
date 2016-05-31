@@ -16,7 +16,6 @@ RobotArmTasks::RobotArmTasks(ros::NodeHandle *t_nh,
     m_armMoveTopicName(t_armMoveTopicName),
     m_armGoalReachedTopicName(t_armGoalReachedTopicName)
 {
-    std::cout <<"building arm tasks" << std::endl;
     m_connectionInitialized = false;
     initRosConnection(m_nh);
 }
