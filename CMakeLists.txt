@@ -21,6 +21,7 @@ find_package(catkin REQUIRED COMPONENTS
   vision_msgs
   geometry_msgs
   navig_msgs
+  manip_msgs
 )
 find_package(Boost REQUIRED COMPONENTS
     thread
