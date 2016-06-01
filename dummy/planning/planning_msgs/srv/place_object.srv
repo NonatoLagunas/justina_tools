@@ -1,4 +1,4 @@
 string dest_location
-int arm_to_use
+int32 arm_to_use
 ---
 bool task_success
