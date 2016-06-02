@@ -94,6 +94,7 @@ class FaceRecognitionTasks
             bool smilingFace; 
             int faceGender;
 
+            FaceObject() {}
             FaceObject(std::string t_faceID, float t_confidence, 
                     geometry_msgs::Point t_faceCentroid,
                     std::vector<geometry_msgs::Point> t_boundingBox,
