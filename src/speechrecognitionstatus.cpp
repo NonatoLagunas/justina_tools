@@ -83,7 +83,7 @@ void SpeechRecognitionStatus::recoSentenceCallback(const
      */
     clearRecoSentencesQueue(m_lastRecoSentencesQueue);
 
-    int hypothesisCount = recoSentencesMsg->hypotesis.size();
+    int hypothesisCount = recoSentencesMsg->hypothesis.size();
     /**
      * Add each recognized sentence to the last recognized sentences queue and, 
      * if the listen mode is activated, in the listen recognized sentences 
@@ -91,8 +91,8 @@ void SpeechRecognitionStatus::recoSentenceCallback(const
      */
     for(int i=0; i<hypothesisCount; i++)
     {
-        RecognizedSentence currentHypothesis(recoSentencesMsg->hypotesis[i], 
-                recoSentencesMsg->confidence[i]);
+        RecognizedSentence currentHypothesis(recoSentencesMsg->hypothesis[i], 
+                recoSentencesMsg->confidences[i]);
         m_lastRecoSentencesQueue.push(currentHypothesis);
 
         if(m_listenActivated) 
