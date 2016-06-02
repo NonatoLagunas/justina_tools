@@ -34,8 +34,8 @@ class SpeechGeneratorTasks
          * @param asyncSpeechServiceName The name of the service which will 
          * perform the asynchronous text-to-speech task. Default "/spg_say"
          */
-        SpeechGeneratorTasks(std::string syncSpeechServName="/spg_say", 
-                std::string asyncSpeechServName="/spg_say");
+        SpeechGeneratorTasks(std::string syncSpeechServName="/interoperation/spg_say", 
+                std::string asyncSpeechServName="/interoperation/spg_asay");
         /**
          * @brief Performs a synchronous text-to-speech task.
          * 
