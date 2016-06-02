@@ -155,6 +155,7 @@ void FaceRecognitionTasks::recoFacesResultsCallback(
         
         m_lastDetectedFaces.push_back(currentFace);
     }
+    m_faceRecognitionFinished = true;
 }
 
 void FaceRecognitionTasks::startFaceTraining(std::string t_faceID, int t_frames)
@@ -258,11 +259,20 @@ bool FaceRecognitionTasks::recognizeFaces(std::vector<FaceObject>
 
     startFaceRecognition();
 
+    bool facesDetected = false;
     chrono::milliseconds elapsedTime;
     chrono::steady_clock::time_point startTime = chrono::steady_clock::now();
-    while(ros::ok() && !faceRecognitionFinished() && 
+    while(ros::ok() && !facesDetected && 
             elapsedTime.count()<t_timeout)
     {
+        if(faceRecognitionFinished() && m_lastDetectedFaces.size() == 0)
+        {
+            startFaceRecognition();
+        }
+        if(faceRecognitionFinished() && m_lastDetectedFaces.size() > 0)
+        {
+            facesDetected = true;
+        }
         elapsedTime = chrono::duration_cast<chrono::milliseconds>(
                 chrono::steady_clock::now() - startTime
                 );
